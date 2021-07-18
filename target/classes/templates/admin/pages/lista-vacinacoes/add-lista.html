@@ -69,13 +69,11 @@
             <!-- left column -->
             <div class="col-12">
               <!-- general form elements -->
-              <div class="card card-primary">
+              <!-- <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">Instituição com Requisição</h3>
                 </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <!-- th:action="@{vacinacoes/pesquisar/{id}}" -->
+               
                 <form th:action="@{vacinacoes/gravar}" th:modelAttribute="${instituicaoId}" method="POST"
                   th:object="${listaVacinacao}">
                   <div class="card-body">
@@ -98,7 +96,7 @@
                     <button type="submit" class="btn btn-primary">Pesquisar</button>
                   </div>
                 </form>
-              </div>
+              </div> -->
               <!-- /.card -->
             </div>
             <!-- /.content-wrapper -->
@@ -116,6 +114,16 @@
                 <form th:action="${listaVacinacao.id == null} ? @{/vacinacoes/gravar} : @{/vacinacoes/editar}"
                   th:object="${listaVacinacao}" method="POST">
                   <div class="card-body">
+
+                    <div class="form-group">
+                      <label>Instituição</label>
+                      <select id="instituicao" class="form-control select2" style="width: 100%;"
+                        th:field="*{instituicao}">
+                        <option value="">Selecione</option>
+                        <option name="instituicaoId" th:each="i : ${instituicoess}" th:value="${i.instituicao.id}"
+                          th:text="${i.instituicao.nome}">
+                      </select>
+                    </div>
 
                     <div class="form-group">
                       <label>Sala</label>
