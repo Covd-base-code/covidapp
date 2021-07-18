@@ -106,7 +106,7 @@ public class ListaVacinacaoController {
    * @return
    */
   @PostMapping("gravar")
-  public String gravar(ListaVacinacao listaVacinacao, RedirectAttributes atrr, List<Funcionario> funcionarios) {
+  public String gravar(ListaVacinacao listaVacinacao, RedirectAttributes atrr) {
     listaVacinacaoService.registar(listaVacinacao);
     atrr.addFlashAttribute("success", "Lista cadastrada com sucesso.");
     return "redirect:/vacinacoes/cadastrar";
