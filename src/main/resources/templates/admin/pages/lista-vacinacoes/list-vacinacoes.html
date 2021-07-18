@@ -30,12 +30,12 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Requisições de Salas</h1>
+                                <h1>Lista de Vacinações</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                    <li class="breadcrumb-item active">Requisições de Salas</li>
+                                    <li class="breadcrumb-item active">Lista de Vacinações</li>
                                 </ol>
                             </div>
                         </div>
@@ -49,44 +49,89 @@
                             <div class="col-12">
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Requisições Disponiveis</h3>
+                                        <h3 class="card-title">Listas Disponiveis</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Nome da Instituicao</th>
-                                                    <th>Nome da sala</th>
-                                                    <th>Data de Inicio</th>
-                                                    <th>Data de Término</th>
-                                                    <th>Accoes</th>
+                                                    <!-- <th>Nome da Instituicao</th>
+                                                    <th>Numero de Listas</th>
+                                                    <th>Nome da Sala</th>
+                                                    <th></th> 
+                                                    <th>Acções</th>-->
+                                                    <th>Nome da Instituição</th>
+                                                    <th>Nome da Sala</th>
+                                                    <th>Funcionários</th>
+
+                                                    <!-- <th></th> -->
+                                                    <th>Acções</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr th:each="sr : ${requisitadas}">
-                                                    <td th:text="${sr.instituicao.nome}"></td>
-                                                    <td th:text="${sr.sala.nome}"></td>
-                                                    <td th:text="${#dates.format(sr.data_inicio, 'dd/MM/yyyy')}">
+                                                <tr th:each="lv : ${listavacinacoes}">
+                                                    <td th:text="${lv.instituicao.nome}"></td>
+                                                    <td th:text="${lv.sala.nome}"></td>
+
+                                                    <td>
+                                                        <center>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-toggle="popover" title="funcionarios"
+                                                                th:attr="data-content=${lv.funcionario.nome }">
+                                                                <i class="fas fa-user-tie"> Ver
+                                                                </i></button>
+                                                        </center>
+
+                                                        <!-- <button type="button" class="btn btn-primary"
+                                                            data-toggle="modal" data-target="#exampleModal"
+                                                            th:attr="data-content=${lv.funcionario.nome }">
+                                                            Ver
+                                                        </button>
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Funcionarios da lista</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td th:text="${lv.instituicao.nome}">
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
                                                     </td>
 
-                                                    <td th:text="${#dates.format(sr.data_termino, 'dd/MM/yyyy')}">
-                                                    </td>
-                                                    <td class="project-actions text-right">
+
+                                                    <td class=" project-actions text-right">
                                                         <!-- <a class="btn btn-primary btn-sm" href="#">
-                                                            <i class="fas fa-folder">
-                                                            </i>
-                                                            Ver
-                                                        </a> -->
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            Ver
+                                        </a> -->
                                                         <a class="btn btn-info btn-sm"
-                                                            th:href="@{/salas-requisitadas/editar/{id} (id=${sr.id})}">
+                                                            th:href="@{/vacinacoes/editar/{id} (id=${lv.id})}">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Editar
                                                         </a>
 
                                                         <button
-                                                            th:id="${#strings.concat('btn_salas-requisitadas/apagar/', sr.id)}"
+                                                            th:id="${#strings.concat('btn_vacinacoes/apagar/', lv.id)}"
                                                             type="button" class="btn btn-danger btn-sm"
                                                             data-toggle="modal" data-target="#myModal">
                                                             <i class="fas fa-trash">
@@ -156,6 +201,18 @@
                     "autoWidth": false,
                     "responsive": true,
                 });
+
+            });
+
+
+            $(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+
+            $(document).ready(function () {
+                $(".navbar-toggle").click(function () {
+                    $(".sidebar").toggleClass("sidebar-open");
+                })
             });
         </script>
     </body>

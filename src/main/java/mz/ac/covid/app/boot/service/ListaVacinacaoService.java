@@ -6,7 +6,7 @@ import mz.ac.covid.app.boot.domain.ListaVacinacao;
 
 public interface ListaVacinacaoService {
 
-  void registar(ListaVacinacao listaVacinacao);
+	void registar(ListaVacinacao listaVacinacao);
 
 	void editar(ListaVacinacao listaVacinacao);
 
@@ -14,6 +14,6 @@ public interface ListaVacinacaoService {
 
 	ListaVacinacao pesquisarPorId(Long id);
 
-  List<ListaVacinacao> pesquisarTodos();
+	List<ListaVacinacao> pesquisarTodos();
 
 }

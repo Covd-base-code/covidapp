@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>UJC | Minhas Requisições</title>
+
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -60,7 +60,6 @@
                                                     <th>Nome da sala</th>
                                                     <th>Data de Inicio</th>
                                                     <th>Data de Término</th>
-                                                    <!-- <th>Estado</th> -->
                                                     <th>Accoes</th>
                                                 </tr>
                                             </thead>
@@ -78,27 +77,24 @@
                                                             <i class="fas fa-folder">
                                                             </i>
                                                             Ver
-                                                        </a>
+                                                        </a> -->
                                                         <a class="btn btn-info btn-sm"
-                                                            th:href="@{/instituicoes/editar/{id} (id=${i.id})}">
+                                                            th:href="@{/salas-requisitadas/editar/{id} (id=${sr.id})}">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Editar
                                                         </a>
 
                                                         <button
-                                                            th:id="${#strings.concat('btn_instituicoes/apagar/', i.id)}"
+                                                            th:id="${#strings.concat('btn_salas-requisitadas/apagar/', sr.id)}"
                                                             type="button" class="btn btn-danger btn-sm"
                                                             data-toggle="modal" data-target="#myModal">
                                                             <i class="fas fa-trash">
                                                             </i> Apagar
-                                                        </button> -->
-
-
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
-
                                         </table>
                                     </div>
                                     <!-- /.card-body -->

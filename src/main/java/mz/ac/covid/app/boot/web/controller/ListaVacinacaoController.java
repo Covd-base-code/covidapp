@@ -56,7 +56,7 @@ public class ListaVacinacaoController {
   @GetMapping("listar")
   public String listar(ModelMap model) {
     model.addAttribute("listavacinacoes", listaVacinacaoService.pesquisarTodos());
-    return "/admin/pages/lista-vacinacoes/list-vacinacao";
+    return "/admin/pages/lista-vacinacoes/list-vacinacoes";
   }
 
   /**
@@ -106,7 +106,7 @@ public class ListaVacinacaoController {
    * @return
    */
   @PostMapping("gravar")
-  public String gravar(ListaVacinacao listaVacinacao, RedirectAttributes atrr) {
+  public String gravar(ListaVacinacao listaVacinacao, RedirectAttributes atrr, List<Funcionario> funcionarios) {
     listaVacinacaoService.registar(listaVacinacao);
     atrr.addFlashAttribute("success", "Lista cadastrada com sucesso.");
     return "redirect:/vacinacoes/cadastrar";

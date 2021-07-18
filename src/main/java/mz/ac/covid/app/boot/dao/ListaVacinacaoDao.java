@@ -2,6 +2,7 @@ package mz.ac.covid.app.boot.dao;
 
 import java.util.List;
 
+import mz.ac.covid.app.boot.domain.Funcionario;
 import mz.ac.covid.app.boot.domain.ListaVacinacao;
 
 public interface ListaVacinacaoDao {

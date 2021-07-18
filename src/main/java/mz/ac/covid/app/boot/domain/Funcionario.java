@@ -41,6 +41,8 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(name = "email")
 	private String email;
 
+	// add chave de lista de vacinacao
+
 	public String getNome() {
 		return nome;
 	}
