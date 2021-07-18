@@ -118,8 +118,15 @@ public class ListaVacinacaoController {
    * 
    * @return
    */
+  @ModelAttribute("instituicoess")
+  public List<InstituicaoSala> listaInstituicoes() {
+    // return instituicaoService.pesquisarTodos();
+    return instituicaoSalaService.pesquisarTodos();
+
+  }
+
   @ModelAttribute("instituicoes")
-  public List<Instituicao> listaInstituicoes() {
+  public List<Instituicao> listarInstituicoes() {
     return instituicaoService.pesquisarTodos();
   }
 
@@ -166,6 +173,24 @@ public class ListaVacinacaoController {
     instituicaoSalaService.registar(instituicaoSala);
     atrr.addFlashAttribute("success", "Requisição feita com sucesso.");
     return "redirect:/vacinacoes/requisitar";
+  }
+
+  // SECCAO DE CRIACAO DE LISTAS DE VACINACAO
+
+  /// instituicoes/editar/{id} (id=${i.id}
+
+  /**
+   * Metodo que permite pesquisar um listas de vacinacao com base no seu id e
+   * somente se ele nao tiver cargos vinculados a ele
+   * 
+   * @param id
+   * @param model
+   * @return
+   */
+  @GetMapping("pesquisar/{id}")
+  public String pesquisarInstituicao(@PathVariable("id") Long id, ModelMap model) {
+    model.addAttribute("salaInstituicoes", instituicaoSalaService.pesquisarPorId(id));
+    return "redirect:/vacinacoes/cadastrar";
   }
 
   @RequestMapping("envioInstituicao")
