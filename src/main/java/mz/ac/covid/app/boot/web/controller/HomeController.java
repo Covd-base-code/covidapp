@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping("admin")
     public String admin() {
-        return "/iframe";
+        return "iframe";
     }
 
     @GetMapping("home")

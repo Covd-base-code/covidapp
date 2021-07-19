@@ -35,13 +35,13 @@ public class FuncionarioController {
     @GetMapping("cadastrar")
     public String cadastrar(Funcionario funcionario) {
 
-        return "/admin/pages/funcionarios/add-func";
+        return "admin/pages/funcionarios/add-func";
     }
 
     @GetMapping("listar")
     public String listar(ModelMap model) {
         model.addAttribute("funcionarios", funcionarioService.pesquisarTodos());
-        return "/admin/pages/funcionarios/list-func";
+        return "admin/pages/funcionarios/list-func";
     }
 
     /**
@@ -55,7 +55,7 @@ public class FuncionarioController {
     @GetMapping("editar/{id}")
     public String preActualizar(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("funcionario", funcionarioService.pesquisarPorId(id));
-        return "/admin/pages/funcionarios/add-func";
+        return "admin/pages/funcionarios/add-func";
     }
 
     @PostMapping("editar")

@@ -22,13 +22,13 @@ public class DepartamentoController {
     @GetMapping("cadastrar")
     public String cadastrar(Departamento departamento) {
 
-        return "/admin/pages/departamentos/add-departamento";
+        return "admin/pages/departamentos/add-departamento";
     }
 
     @GetMapping("listar")
     public String listar(ModelMap model) {
         model.addAttribute("departamentos", departamentoService.pesquisarTodos());
-        return "/admin/pages/departamentos/list-departamento";
+        return "admin/pages/departamentos/list-departamento";
     }
 
     /**
@@ -43,7 +43,7 @@ public class DepartamentoController {
     public String preActualizar(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("departamento", departamentoService.pesquisarPorId(id));
 
-        return "/admin/pages/departamentos/add-departamento";
+        return "admin/pages/departamentos/add-departamento";
     }
 
     @PostMapping("editar")

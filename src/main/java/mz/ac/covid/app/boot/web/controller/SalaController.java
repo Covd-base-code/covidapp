@@ -22,13 +22,13 @@ public class SalaController {
     @GetMapping("cadastrar")
     public String cadastrar(Sala sala) {
 
-        return "/admin/pages/salas/add-sala";
+        return "admin/pages/salas/add-sala";
     }
 
     @GetMapping("listar")
     public String listar(ModelMap model) {
         model.addAttribute("salas", salaService.buscarTodos());
-        return "/admin/pages/salas/list-sala";
+        return "admin/pages/salas/list-sala";
     }
 
     /**
@@ -43,7 +43,7 @@ public class SalaController {
     public String preActualizar(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("sala", salaService.buscarPorId(id));
 
-        return "/admin/pages/salas/add-sala";
+        return "admin/pages/salas/add-sala";
     }
 
     @PostMapping("editar")

@@ -41,13 +41,13 @@ public class ListaVacinacaoController {
   @GetMapping("cadastrar")
   public String cadastrar(ListaVacinacao listaVacinacao) {
 
-    return "/admin/pages/lista-vacinacoes/add-lista";
+    return "admin/pages/lista-vacinacoes/add-lista";
   }
 
   @GetMapping("listar")
   public String listar(ModelMap model) {
     model.addAttribute("listavacinacoes", listaVacinacaoService.pesquisarTodos());
-    return "/admin/pages/lista-vacinacoes/list-vacinacao";
+    return "admin/pages/lista-vacinacoes/list-vacinacao";
   }
 
   /**
@@ -61,7 +61,7 @@ public class ListaVacinacaoController {
   @GetMapping("editar/{id}")
   public String preActualizar(@PathVariable("id") Long id, ModelMap model) {
     model.addAttribute("lista", listaVacinacaoService.pesquisarPorId(id));
-    return "/admin/pages/lista-vacinacoes/add-lista";
+    return "admin/pages/lista-vacinacoes/add-lista";
   }
 
   @PostMapping("editar")
