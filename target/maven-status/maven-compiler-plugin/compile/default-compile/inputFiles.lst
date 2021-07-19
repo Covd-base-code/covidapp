@@ -1,6 +1,7 @@
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/dao/InstituicaoSalaDao.java
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/dao/EnderecoDaoImpl.java
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/domain/Funcionario.java
+/home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/web/controller/InstituicaoSalaController.java
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/domain/Sala.java
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/repository/IFuncionarioRepository.java
 /home/helderjosue/git/covidapp/covidapp/src/main/java/mz/ac/covid/app/boot/dao/InstituicaoDao.java
