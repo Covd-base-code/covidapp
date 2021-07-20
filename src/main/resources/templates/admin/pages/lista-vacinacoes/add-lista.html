@@ -69,13 +69,12 @@
             <!-- left column -->
             <div class="col-12">
               <!-- general form elements -->
-              <!-- <div class="card card-primary">
+              <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">Instituição com Requisição</h3>
                 </div>
-               
-                <form th:action="@{vacinacoes/gravar}" th:modelAttribute="${instituicaoId}" method="POST"
-                  th:object="${listaVacinacao}">
+
+                <form th:action="@{/vacinacoes/pesquisar/{id} (id=1)}" method="GET" th:object="${listaVacinacao}">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -91,12 +90,10 @@
                     <div class="form-group">
                       <input type="hidden" name="id" th:field="*{id}">
                     </div>
-
-
                     <button type="submit" class="btn btn-primary">Pesquisar</button>
                   </div>
                 </form>
-              </div> -->
+              </div>
               <!-- /.card -->
             </div>
             <!-- /.content-wrapper -->
@@ -120,8 +117,8 @@
                       <select id="instituicao" class="form-control select2" style="width: 100%;"
                         th:field="*{instituicao}">
                         <option value="">Selecione</option>
-                        <option name="instituicaoId" th:each="i : ${instituicoess}" th:value="${i.instituicao.id}"
-                          th:text="${i.instituicao.nome}">
+                        <option name="instituicaoId" th:each="i : ${funcionariosDaInstituicao}"
+                          th:value="${i.instituicao.id}" th:text="${i.instituicao.nome}">
                       </select>
                     </div>
 
@@ -129,8 +126,9 @@
                       <label>Sala</label>
                       <select id="sala" class="form-control select2" style="width: 100%;" th:field="*{sala}">
                         <option value="">Selecione</option>
-                        <option th:each="si : ${salas}" th:value="${si.id}" th:text="${si.nome}">
-                          <!-- <option th:each="si : ${salaInstituicoes}" th:value="${si.sala}" th:text="${si.sala.nome}"> -->
+                        <!-- <option th:each="si : ${salas}" th:value="${si.id}" th:text="${si.nome}"> -->
+                        <option th:each="si : ${funcionariosDaInstituicao}" th:value="${si.sala}"
+                          th:text="${si.sala.nome}">
                       </select>
                     </div>
 
@@ -141,7 +139,10 @@
                       <select id="funcionario" class="select2" multiple="multiple"
                         data-placeholder="Selecione varios funcionarios" style="width: 100%;" th:field="*{funcionario}">
                         <option value="">Selecione</option>
-                        <option th:each="f : ${funcionarios}" th:value="${f.id}" th:text="${f.nome}"></option>
+                        <!-- <option th:each="f : ${funcionarios}" th:value="${f.id}" th:text="${f.nome}"></option> -->
+                        <option th:each="f : ${funcionariosDaInstituicao}" th:value="${f.id}" th:text="${f.nome}">
+                        </option>
+
                       </select>
                     </div>
 

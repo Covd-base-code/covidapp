@@ -1,7 +1,6 @@
 package mz.ac.covid.app.boot.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -35,8 +34,8 @@ public class Funcionario extends AbstractEntity<Long> {
 	@JoinColumn(name = "instituicao_id_fk")
 	private Instituicao instituicao;
 
-	@OneToMany(mappedBy = "funcionario")
-	private List<Telefone> telefones;
+	@Column(name = "contacto")
+	private String telefone;
 
 	@Column(name = "email")
 	private String email;
@@ -91,12 +90,12 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.instituicao = instituicao;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getEmail() {

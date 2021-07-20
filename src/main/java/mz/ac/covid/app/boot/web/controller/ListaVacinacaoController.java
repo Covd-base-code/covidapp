@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.ac.covid.app.boot.domain.Customer;
 import mz.ac.covid.app.boot.domain.Funcionario;
 import mz.ac.covid.app.boot.domain.Instituicao;
 import mz.ac.covid.app.boot.domain.InstituicaoSala;
 import mz.ac.covid.app.boot.domain.ListaVacinacao;
 import mz.ac.covid.app.boot.domain.Sala;
 import mz.ac.covid.app.boot.repository.IFuncionarioRepository;
+import mz.ac.covid.app.boot.service.CustomerService;
 import mz.ac.covid.app.boot.service.FuncionarioService;
 import mz.ac.covid.app.boot.service.InstituicaoSalaService;
 import mz.ac.covid.app.boot.service.InstituicaoService;
@@ -47,10 +49,18 @@ public class ListaVacinacaoController {
   @Autowired
   private IFuncionarioRepository funcionarioRepository;
 
+  @Autowired
+  private CustomerService customerService;
+
   @GetMapping("cadastrar")
   public String cadastrar(ListaVacinacao listaVacinacao) {
 
     return "/admin/pages/lista-vacinacoes/add-lista";
+  }
+
+  @GetMapping("submeter")
+  public String submeter() {
+    return "/admin/pages/lista-vacinacoes/add-excel";
   }
 
   @GetMapping("listar")
@@ -177,8 +187,6 @@ public class ListaVacinacaoController {
 
   // SECCAO DE CRIACAO DE LISTAS DE VACINACAO
 
-  /// instituicoes/editar/{id} (id=${i.id}
-
   /**
    * Metodo que permite pesquisar um listas de vacinacao com base no seu id e
    * somente se ele nao tiver cargos vinculados a ele
@@ -189,18 +197,33 @@ public class ListaVacinacaoController {
    */
   @GetMapping("pesquisar/{id}")
   public String pesquisarInstituicao(@PathVariable("id") Long id, ModelMap model) {
-    model.addAttribute("salaInstituicoes", instituicaoSalaService.pesquisarPorId(id));
+    model.addAttribute("funcionariosDaInstituicao", funcionarioRepository.listaInstituicaoSalas(id));
     return "redirect:/vacinacoes/cadastrar";
+
   }
 
-  @RequestMapping("envioInstituicao")
-  public String envioInstituicao(@ModelAttribute("instituicaoId") Long instituicaoId) {
-    System.out.println(instituicaoId);
+  // @RequestMapping("pesquisar")
+  // public String envioInstituicao(ListaVacinacao listaVacinacao, ModelMap model)
+  // {
+  // listaVacinacaoService.registar(listaVacinacao);
+  // model.addAttribute("success", "Lista Cadastrada com sucesso.");
+  // return "redirect:/vacinacoes/requisitar";
+  // }
 
-    List<Funcionario> funcionarios = funcionarioRepository.listaFuncionarios(instituicaoId);
+  /** LISTA DE VACINADOS - EXTRAIDA E PERSISTIDA POR FICHEIROS CSV */
 
-    System.out.println(funcionarios);
-
-    return "redirect:/vacinacoes/requisitar";
+  @GetMapping("listar-vacinados")
+  public String vacinados(ModelMap model) {
+    model.addAttribute("listavacinados", customerService.buscarTodos());
+    return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
+
+  @GetMapping("estado/{id}")
+  public String estados(ModelMap model, @PathVariable("id") Long id, String estado, RedirectAttributes atrr) {
+    Customer customer = customerService.buscarPorId(id);
+    customer.setEstadoVacinacao(estado);
+    atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
+    return "/admin/pages/lista-vacinacoes/list-vacinados";
+  }
+
 }
