@@ -9,9 +9,9 @@ import mz.ac.covid.app.boot.domain.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query(value="SELECT empresa FROM customer GROUP BY empresa", nativeQuery = true)
-    public List<String> getAllInstitutions();
+    @Query(value = "SELECT empresa FROM customer GROUP BY empresa", nativeQuery = true)
+    public List<Customer> getAllInstitutions();
 
-    @Query(value="SELECT sala_vacinacao FROM customer GROUP BY sala_vacinacao", nativeQuery = true)
-    public List<String> getAllSalas();
+    @Query(value = "SELECT sala_vacinacao FROM customer GROUP BY sala_vacinacao", nativeQuery = true)
+    public List<Customer> getAllSalas();
 }

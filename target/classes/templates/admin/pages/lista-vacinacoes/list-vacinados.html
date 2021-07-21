@@ -56,26 +56,26 @@
                                     </div>
 
                                     <form th:action="@{/vacinacoes/pesquisar/{id} (id=1)}" method="GET"
-                                        th:object="${listaVacinacao}">
+                                        th:object="${customer}">
                                         <div class="card-body">
 
                                             <div class="form-group">
                                                 <label>Instituição</label>
                                                 <select id="instituicao" class="form-control select2"
-                                                    style="width: 100%;" th:field="*{instituicao}">
+                                                    style="width: 100%;" th:field="*{empresa}">
                                                     <option value="">Selecione</option>
-                                                    <option name="instituicaoId" th:each="i : ${instituicoes}"
+                                                    <option name="empresaId" th:each="i : ${instituicoesss}"
                                                         th:value="${i.id}" th:text="${i.empresa}">
                                                 </select>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Instituição</label>
-                                                <select id="instituicao" class="form-control select2"
-                                                    style="width: 100%;" th:field="*{instituicao}">
+                                                <select id="salaVacinacao" class="form-control select2"
+                                                    style="width: 100%;" th:field="*{salaVacinacao}">
                                                     <option value="">Selecione</option>
-                                                    <option name="instituicaoId" th:each="i : ${instituicoes}"
-                                                        th:value="${i.id}" th:text="${i.salaVacinacao}">
+                                                    <!-- <option name="salaVacinacaoId" th:each="i : ${instituicoes}"
+                                                        th:value="${i.id}" th:text="${i.salaVacinacao}"> -->
                                                 </select>
                                             </div>
 

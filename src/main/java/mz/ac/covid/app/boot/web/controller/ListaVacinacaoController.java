@@ -150,18 +150,20 @@ public class ListaVacinacaoController {
    * 
    * @return
    */
-  @ModelAttribute("instituicoes")
-  public List<String> getAllInstitutions() {
+  @ModelAttribute("instituicoesss")
+  public List<Customer> getAllInstitutions() {
+    // System.out.println(customerRepository.getAllInstitutions());
     return customerRepository.getAllInstitutions();
   }
-    /**
+
+  /**
    * Metodo para listar todas as isntituiceos e mostrar na combobox presente no
    * formulario dos dados carregados por excel
    * 
    * @return
    */
   @ModelAttribute("salas")
-  public List<String> getAllSalas() {
+  public List<Customer> getAllSalas() {
     return customerRepository.getAllSalas();
   }
 
