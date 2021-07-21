@@ -31,7 +31,7 @@ public class ApacheCommonsCsvUtil {
                         customer.getTelefone(), customer.getEmpresa(), customer.getEmail(),
                         String.valueOf(customer.getDataVacinacao()), String.valueOf(customer.getSalaVacinacao()),
                         String.valueOf(customer.getHoraVacinacao()), String.valueOf(customer.getTelefoneGestor()),
-                        customer.getNotificar(), customer.getEstado_vacinacao());
+                        customer.getNotificar(), customer.getEstadoVacinacao());
 
                 csvPrinter.printRecord(data);
             }

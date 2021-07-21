@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Upload Download CSV File Example</title>
+        <!-- <title>Upload Download CSV File Example</title> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -103,12 +103,36 @@
                 });
             })
         </script>
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+        <!-- daterange picker -->
+        <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+        <!-- iCheck for checkboxes and radio inputs -->
+        <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <!-- Bootstrap Color Picker -->
+        <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+        <!-- Tempusdominus Bootstrap 4 -->
+        <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <!-- Bootstrap4 Duallistbox -->
+        <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+        <!-- BS Stepper -->
+        <link rel="stylesheet" href="../../plugins/bs-stepper/css/bs-stepper.min.css">
+        <!-- dropzonejs -->
+        <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     </head>
 
     <body>
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
-                <div class="card card-primary" style="margin-left: 450px; width: 100%;padding: 10px;">
+                <div class="col-sm-7" style="background-color:#e6fffa; padding:10px; border-radius:3px">
                     <h3>Carregar Ficheiro CSV</h3>
                     <form id="uploadSingleFileForm">
                         <div class="form-group">
@@ -146,8 +170,249 @@
                         File</a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Carregar Listas</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item active">Carregar Listas</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <div class="content">
+            <!-- <div class="card-footer">
+                <button type="submit" class="btn btn-primary" id="btnUploadSingleFileSubmit">Baixar</button>
+            </div> -->
+            <div class="card-footer">
+                <a href="/api/download/csv/" class="btn btn-primary" role="button" id="downloadcsvfile"
+                    style="float: right; margin-left: 10px;">
+                    Baixar Lista CSV</a>
+
+                <a href="/api/download/csv/" class="btn btn-primary" role="button" id="downloadcsvfile"
+                    style="float: right;">
+                    Baixar Lista Excel</a>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div th:replace="fragments/alert"></div>
+                <div class="row">
+                    <!-- <div class="col-md-6"></div> -->
+                    <div class="card card-primary" style=" width: 50%;padding: 10px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Carregar Ficheiro CSV</h3>
+                        </div>
+                        <form id="uploadSingleFileForm">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div id="response" style="display:none">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="card-header" for="csvfile">Escolha um Ficheiro Csv</label>
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" id="csvfile" name="csvfile"
+                                                required>
+
+                                        </div>
+
+
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary"
+                                                id="btnUploadSingleFileSubmit">Carregar</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Carregar Varios Ficheiros Csv</h3>
+                            </div>
+                            <form id="uploadMultipleFilesForm">
+                                <div class="card-body">
+
+
+
+                                    <!-- <div class="col-md-12"> -->
+                                    <label class="card-header" for="csvfiles">Escolha os Ficheiros Csv</label>
+
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" id="csvfiles" name="csvfiles" multiple
+                                            required>
+
+                                    </div>
+                                    <div id="responses" style="display:none">
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary"
+                                            id="btnUploadMultipleFilesSubmit">Carregar</button>
+
+                                        <a href="/api/download/csv/" class="btn btn-primary" role="button"
+                                            id="downloadcsvfile" style="float: right;">
+                                            Baixar Lista CSV</a>
+                                    </div>
+                                </div>
+
+                                <!-- </div> -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="row" style="width: 50%;">
+                    <!-- <div class="col-md-6"></div> -->
+                    <div class="card card-primary" style=" width: 100%;padding: 10px;">
+                        <div class="card-header">
+                            <h3 class="card-title">Carregar Ficheiro Excel</h3>
+                        </div>
+                        <form id="uploadSingleFileForm">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div id="response" style="display:none">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="card-header" for="csvfile">Escolha um Ficheiro Excel</label>
+                                        <div class="form-group">
+                                            <input type="file" class="form-control" id="csvfile" name="csvfile"
+                                                required>
+
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary"
+                                                id="btnUploadSingleFileSubmit">Carregar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Carregar Varios Ficheiros Excel</h3>
+                            </div>
+                            <form id="uploadMultipleFilesForm">
+                                <div class="card-body">
+
+
+
+                                    <!-- <div class="col-md-12"> -->
+                                    <label class="card-header" for="csvfiles">Escolha os Ficheiros Excel</label>
+
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" id="csvfiles" name="csvfiles" multiple
+                                            required>
+
+                                    </div>
+                                    <div id="responses" style="display:none">
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary"
+                                            id="btnUploadMultipleFilesSubmit">Carregar</button>
+                                        <a href="/api/excel/download" class="btn btn-primary" role="button"
+                                            id="downloadcsvfile" style="float: right;">
+                                            Baixar Lista Excel</a>
+                                    </div>
+                                </div>
+
+                                <!-- </div> -->
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- <div id="response" style="display:none">
+                    </div> -->
+            <!-- <div class="container-fluid"> -->
+            <!-- <div class="col-6"> -->
+            <!-- general form elements -->
+            <!-- <div class="row">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Carregar Varios Ficheiros Csv</h3>
+                    </div>
+                    <form id="uploadMultipleFilesForm">
+                        <div class="card-body">
+
+                        </div>
+                        <div class="col-md-12">
+                            <label class="card-header" for="csvfiles">Escolha os Ficheiros Csv</label>
+
+                            <div class="form-group">
+                                <input type="file" class="form-control" id="csvfiles" name="csvfiles" multiple required>
+                                
+                            </div>
+                            <div id="responses" style="display:none">
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary"
+                                        id="btnUploadMultipleFilesSubmit">Carregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div> -->
+            <!-- </div> -->
+            </div>
+
+            </div>
+            <!-- <hr> -->
+            <!-- <div class="row">
+                <div class="col-sm-7" style="background-color:#e6fffa; padding:10px; border-radius:3px">
+                    <h3>Upload Multiple Files</h3>
+                    <form id="uploadMultipleFilesForm">
+                        <div class="form-group">
+                            <label class="control-label" for="csvfiles">Escolha Varios Ficheiros Csv</label>
+                            <input type="file" class="form-control" placeholder="Choose upload files" id="csvfiles"
+                                name="csvfiles" multiple required></input>
+                        </div>
+                        <button type="submit" class="btn btn-danger" id="btnUploadMultipleFilesSubmit">Carregar</button>
+                    </form>
+                    <div id="responses" style="display:none">
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-7">
+                    <a href="/api/download/csv/" class="btn btn-primary" role="button" id="downloadcsvfile">Download
+                        CSV
+                        File</a>
+                </div>
+            </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+        </section>
 
     </body>
 
