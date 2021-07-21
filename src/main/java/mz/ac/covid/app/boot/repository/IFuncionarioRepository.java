@@ -3,7 +3,6 @@ package mz.ac.covid.app.boot.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import mz.ac.covid.app.boot.domain.Instituicao;
 import mz.ac.covid.app.boot.domain.InstituicaoSala;
 
 import java.util.List;
