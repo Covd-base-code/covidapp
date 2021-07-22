@@ -42,18 +42,18 @@ public class Customer extends AbstractEntity<Long> {
     @Column(name = "telefone_gestor")
     private String telefoneGestor;
 
-    @Column(name = "notificar")
-    private String notificar;
 
-    @Column(name = "estado_vacinacao")
-    private String estadoVacinacao;
+    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    private boolean notificar;
+
+    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    private boolean estadoVacinacao;
 
     public Customer() {
     }
 
     public Customer(String nome, String telefone, String empresa, String email, String dataVacinacao,
-            String salaVacinacao, String horaVacinacao, String telefoneGestor, String notificar,
-            String estadoVacinacao) {
+            String salaVacinacao, String horaVacinacao, String telefoneGestor) {
         this.nome = nome;
         this.telefone = telefone;
         this.empresa = empresa;
@@ -62,8 +62,6 @@ public class Customer extends AbstractEntity<Long> {
         this.salaVacinacao = salaVacinacao;
         this.horaVacinacao = horaVacinacao;
         this.telefoneGestor = telefoneGestor;
-        this.notificar = notificar;
-        this.estadoVacinacao = estadoVacinacao;
     }
 
     public String getNome() {
@@ -130,19 +128,19 @@ public class Customer extends AbstractEntity<Long> {
         this.telefoneGestor = telefoneGestor;
     }
 
-    public String getNotificar() {
+    public boolean getNotificar() {
         return notificar;
     }
 
-    public void setNotificar(String notificar) {
+    public void setNotificar(boolean notificar) {
         this.notificar = notificar;
     }
 
-    public String getEstadoVacinacao() {
+    public boolean getEstadoVacinacao() {
         return estadoVacinacao;
     }
 
-    public void setEstadoVacinacao(String estadoVacinacao) {
+    public void setEstadoVacinacao(boolean estadoVacinacao) {
         this.estadoVacinacao = estadoVacinacao;
     }
 

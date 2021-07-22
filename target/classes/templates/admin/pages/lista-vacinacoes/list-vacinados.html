@@ -1,89 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SMM - LISTA DE VACINADOS</title>
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-        <!-- DataTables -->
-        <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-        <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    </head>
+    <title>SMM - LISTA DE VACINADOS</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
 
-    <body class="hold-transition sidebar-mini">
-        <div class="wrapper">
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
 
 
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1>Lista de Vacinados</h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                    <li class="breadcrumb-item active">Lista de Vacinados</li>
-                                </ol>
-                            </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Lista de Vacinados</h1>
                         </div>
-                    </div><!-- /.container-fluid -->
-                </section>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Lista de Vacinados</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
 
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Listas Disponiveis</h3>
-                                    </div>
-                                    <!-- /.card-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        
+                        <!--ADICIONEI ESTAS LINHAS PECO PARA VERES-->
+                        <div class="col-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Instituição com Requisição</h3>
+                                </div>
+
+                                <form th:action="@{/vacinacoes/pesquisar/{id} (id=1)}" method="GET"
+                                    th:object="${listaVacinacao}">
                                     <div class="card-body">
-                                        <div th:replace="fragments/alert"></div>
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Funcionário</th>
-                                                    <th>Numero de Telefone</th>
-                                                    <th>Instituição</th>
-                                                    <th>Email</th>
-                                                    <th>Data de Vacinação</th>
-                                                    <th>Hora</th>
-                                                    <th>Sala</th>
-                                                    <th>Numero do Gestor</th>
-                                                    <th>Estado da Vacinação</th>
-                                                    <!-- <th>Notificação</th> -->
-                                                    <th>Accoes</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="lv : ${listavacinados}">
-                                                    <td th:text="${lv.nome}"></td>
-                                                    <td th:text="${lv.telefone}"></td>
-                                                    <td th:text="${lv.empresa}"></td>
-                                                    <td th:text="${lv.email}"></td>
-                                                    <td th:text="${lv.dataVacinacao}"></td>
-                                                    <td th:text="${lv.horaVacinacao}"></td>
-                                                    <td th:text="${lv.salaVacinacao}"></td>
-                                                    <td th:text="${lv.telefoneGestor}"></td>
-                                                    <td th:text="${lv.estadoVacinacao}">
+
+                                        <div class="form-group">
+                                            <label>Instituição</label>
+                                            <select id="instituicao" class="form-control select2" style="width: 100%;"
+                                                th:field="*{instituicao}">
+                                                <option value="">Selecione</option>
+                                                <option name="instituicaoId" th:each="i : ${instituicoess}"
+                                                    th:value="${i.instituicao.id}" th:text="${i.instituicao.nome}">
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="hidden" name="id" th:field="*{id}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
 
 
-                                                        <!-- <button type="button" class="btn btn-primary"
+                        <div class="col-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Listas Disponiveis</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div th:replace="fragments/alert"></div>
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Funcionário</th>
+                                                <th>Numero de Telefone</th>
+                                                <th>Instituição</th>
+                                                <th>Email</th>
+                                                <th>Data de Vacinação</th>
+                                                <th>Hora</th>
+                                                <th>Sala</th>
+                                                <th>Numero do Gestor</th>
+                                                <th>Estado da Vacinação</th>
+                                                <!-- <th>Notificação</th> -->
+                                                <th>Accoes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="lv : ${listavacinados}">
+                                                <td th:text="${lv.nome}"></td>
+                                                <td th:text="${lv.telefone}"></td>
+                                                <td th:text="${lv.empresa}"></td>
+                                                <td th:text="${lv.email}"></td>
+                                                <td th:text="${lv.dataVacinacao}"></td>
+                                                <td th:text="${lv.horaVacinacao}"></td>
+                                                <td th:text="${lv.salaVacinacao}"></td>
+                                                <td th:text="${lv.telefoneGestor}"></td>
+                                                <td th:text="${lv.estadoVacinacao}">
+
+
+                                                    <!-- <button type="button" class="btn btn-primary"
                                                             data-toggle="modal" data-target="#exampleModal"
                                                             th:attr="data-content=${lv.funcionario.nome }">
                                                             Ver
@@ -114,108 +148,108 @@
                                                                 </div>
                                                             </div>
                                                         </div> -->
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-info btn-sm"
-                                                            data-toggle="popover" title="funcionarios">
-                                                            Notificar
-                                                        </button> <br><br>
-                                                        <button th:id="${ 'btn_vacinacoes/estado/' + lv.id}"
-                                                            type="button" class="btn btn-info btn-sm"
-                                                            data-toggle="modal" data-target="#myModal">
-                                                            <!-- <i class="fas fa-pencil-alt"> -->
-                                                            </i> Vacinar
-                                                        </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm"
+                                                        data-toggle="popover" title="funcionarios">
+                                                        Notificar
+                                                    </button> <br><br>
+                                                    <button th:id="${ 'btn_vacinacoes/estado/' + lv.id}" type="button"
+                                                        class="btn btn-info btn-sm" data-toggle="modal"
+                                                        data-target="#myModal">
+                                                        <!-- <i class="fas fa-pencil-alt"> -->
+                                                        </i> Vacinar
+                                                    </button>
 
-                                                    </td>
+                                                </td>
 
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- /.card -->
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.col -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.row -->
+                        <!-- /.col -->
                     </div>
-                    <!-- /.container-fluid -->
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
-
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables  & Plugins -->
-        <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/jszip/jszip.min.js"></script>
-        <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-        <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-        <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable({
-                    "responsive": true, "lengthChange": false, "autoWidth": false,
-                    "buttons": ["excel", "pdf", "print"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
 
-            });
-            var url = "";
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-            $('button[id*="btn"]').click(function () {
-                url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
-            });
-
-            $('#ok_confirm').click(function () {
-
-                document.location.href = url;
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
 
-            $(function () {
-                $('[data-toggle="popover"]').popover();
-            });
+        });
+        var url = "";
 
-            $(document).ready(function () {
-                $(".navbar-toggle").click(function () {
-                    $(".sidebar").toggleClass("sidebar-open");
-                })
-            });
-        </script>
-    </body>
+        $('button[id*="btn"]').click(function () {
+            url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+        });
+
+        $('#ok_confirm').click(function () {
+
+            document.location.href = url;
+        });
+
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+
+        $(document).ready(function () {
+            $(".navbar-toggle").click(function () {
+                $(".sidebar").toggleClass("sidebar-open");
+            })
+        });
+    </script>
+</body>
 
 </html>

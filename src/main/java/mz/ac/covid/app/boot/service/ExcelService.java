@@ -19,8 +19,12 @@ public class ExcelService {
     CustomerRepository repository;
 
     public void save(MultipartFile file) {
+        System.out.println("Tag:: Save Excel");
         try {
             List<Customer> customers = ExcelHelper.excelToCustomers(file.getInputStream());
+
+            System.out.println("Tag:: ExcelHelper");
+            
             repository.saveAll(customers);
         } catch (IOException e) {
             throw new RuntimeException("fail to store excel data: " + e.getMessage());

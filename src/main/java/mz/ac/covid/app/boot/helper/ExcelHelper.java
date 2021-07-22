@@ -21,7 +21,7 @@ public class ExcelHelper {
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = { "Id", "nome", "telefone", "empresa", "email", "dataVacinacao", "salaVacinacao",
-            "horaVacinacao", "telefoneGestor", "notificar", "estadoVacinacao" };
+            "horaVacinacao", "telefoneGestor" };
     static String SHEET = "Customers";
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -36,6 +36,8 @@ public class ExcelHelper {
     public static ByteArrayInputStream excelToCustomers(List<Customer> customers) {
 
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
+
+            System.out.println("Tag:: Load Excel FIle");
             Sheet sheet = workbook.createSheet(SHEET);
 
             // Header
@@ -48,6 +50,9 @@ public class ExcelHelper {
 
             int rowIdx = 1;
             for (Customer customer : customers) {
+
+                System.out.println("Tag:: Load Excel FIle" + rowIdx);
+
                 Row row = sheet.createRow(rowIdx++);
 
                 row.createCell(0).setCellValue(customer.getId());
@@ -63,6 +68,9 @@ public class ExcelHelper {
             }
 
             workbook.write(out);
+
+            System.out.println(out.toByteArray());
+
             return new ByteArrayInputStream(out.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
@@ -130,14 +138,6 @@ public class ExcelHelper {
 
                         case 8:
                             customer.setTelefoneGestor(currentCell.getStringCellValue());
-                            break;
-
-                        case 9:
-                            customer.setNotificar(currentCell.getStringCellValue());
-                            break;
-
-                        case 10:
-                            customer.setEstadoVacinacao(currentCell.getStringCellValue());
                             break;
 
                         default:

@@ -25,13 +25,12 @@ public class ApacheCommonsCsvUtil {
 
         try (CSVPrinter csvPrinter = new CSVPrinter(writer,
                 CSVFormat.DEFAULT.withHeader("id", "nome", "telefone", "empresa", "email", "dataVacinacao",
-                        "horaVacinacao", "salaVacinacao", "telefoneGestor", "notificar", "estadoVacinacao"));) {
+                        "horaVacinacao", "salaVacinacao", "telefoneGestor"));) {
             for (Customer customer : customers) {
                 List<String> data = Arrays.asList(String.valueOf(customer.getId()), customer.getNome(),
                         customer.getTelefone(), customer.getEmpresa(), customer.getEmail(),
                         String.valueOf(customer.getDataVacinacao()), String.valueOf(customer.getSalaVacinacao()),
-                        String.valueOf(customer.getHoraVacinacao()), String.valueOf(customer.getTelefoneGestor()),
-                        customer.getNotificar(), customer.getEstadoVacinacao());
+                        String.valueOf(customer.getHoraVacinacao()), String.valueOf(customer.getTelefoneGestor()));
 
                 csvPrinter.printRecord(data);
             }
@@ -58,8 +57,7 @@ public class ApacheCommonsCsvUtil {
             for (CSVRecord csvRecord : csvRecords) {
                 Customer customer = new Customer(csvRecord.get("nome"), csvRecord.get("telefone"),
                         csvRecord.get("empresa"), csvRecord.get("email"), csvRecord.get("dataVacinacao"),
-                        csvRecord.get("salaVacinacao"), csvRecord.get("horaVacinacao"), csvRecord.get("dataVacinacao"),
-                        csvRecord.get("notificar"), csvRecord.get("estadoVacinacao"));
+                        csvRecord.get("salaVacinacao"), csvRecord.get("horaVacinacao"), csvRecord.get("dataVacinacao"));
 
                 customers.add(customer);
             }

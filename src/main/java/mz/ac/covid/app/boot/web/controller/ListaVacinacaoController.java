@@ -19,6 +19,7 @@ import mz.ac.covid.app.boot.domain.Instituicao;
 import mz.ac.covid.app.boot.domain.InstituicaoSala;
 import mz.ac.covid.app.boot.domain.ListaVacinacao;
 import mz.ac.covid.app.boot.domain.Sala;
+import mz.ac.covid.app.boot.repository.CustomerRepository;
 import mz.ac.covid.app.boot.repository.IFuncionarioRepository;
 import mz.ac.covid.app.boot.service.CustomerService;
 import mz.ac.covid.app.boot.service.FuncionarioService;
@@ -48,6 +49,9 @@ public class ListaVacinacaoController {
 
   @Autowired
   private IFuncionarioRepository funcionarioRepository;
+
+  @Autowired
+  private CustomerRepository customerRepository;
 
   @Autowired
   private CustomerService customerService;
@@ -141,6 +145,27 @@ public class ListaVacinacaoController {
   }
 
   /**
+   * Metodo para listar todas as isntituiceos e mostrar na combobox presente no
+   * formulario dos dados carregados por excel
+   * 
+   * @return
+   */
+  @ModelAttribute("instituicoes")
+  public List<String> getAllInstitutions() {
+    return customerRepository.getAllInstitutions();
+  }
+    /**
+   * Metodo para listar todas as isntituiceos e mostrar na combobox presente no
+   * formulario dos dados carregados por excel
+   * 
+   * @return
+   */
+  @ModelAttribute("salas")
+  public List<String> getAllSalas() {
+    return customerRepository.getAllSalas();
+  }
+
+  /**
    * Metodo para listar todas as salas e mostrar na combobox presente no
    * formulario
    * 
@@ -219,7 +244,7 @@ public class ListaVacinacaoController {
   }
 
   @GetMapping("estado/{id}")
-  public String estados(ModelMap model, @PathVariable("id") Long id, String estado, RedirectAttributes atrr) {
+  public String estados(ModelMap model, @PathVariable("id") Long id, boolean estado, RedirectAttributes atrr) {
     Customer customer = customerService.buscarPorId(id);
     customer.setEstadoVacinacao(estado);
     atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");

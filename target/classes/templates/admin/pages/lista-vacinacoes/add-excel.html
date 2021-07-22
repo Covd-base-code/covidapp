@@ -8,9 +8,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="/js/ajaxupdownloadcsv.js"></script>
+        <!-- <script src="/js/ajaxupdownloadcsv.js"></script> -->
         <script>
             $(document).ready(function () {
+
+                console.log("Loading Ajax")
 
                 /**
                 * Upload single file to SpringBoot
@@ -23,6 +25,49 @@
 
                     $.ajax({
                         url: '/api/upload/csv/single',
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        processData: false,
+                        success: function (response) {
+                            $("#response").empty();
+                            if (response.errStatus !== "error") {
+                                var displayInfo = response.messages[0].filename + " : " + response.messages[0].message + "<br>";
+
+                                $("#response").append(displayInfo);
+                                // add some css
+                                $("#response").css("display", "block");
+                                $("#response").css("background-color", "#e6e6ff");
+                                $("#response").css("border", "solid 1px black");
+                                $("#response").css("border-radius", "3px");
+                                $("#response").css("margin", "10px");
+                                $("#response").css("padding", "10px");
+                            } else {
+                                $("#response").css("display", "none");
+                                var error = response.error.errDesc;
+                                alert(error);
+                            }
+                        },
+                        error: function (e) {
+                            alert("Fail! " + e);
+                        }
+                    });
+
+                    return false;
+                });
+
+                $("btnUploadSingleExcelFileSubmit").submit(function(evt) {
+                    evt.preventDefault();
+
+                    var formData = new FormData($(this)[0]);
+
+                    console.log('Tag Load Excel file')
+
+                    $.ajax({
+                        url: '/api/excel/upload',
                         type: 'POST',
                         data: formData,
                         async: false,
@@ -287,16 +332,16 @@
                                     <div id="response" style="display:none">
                                     </div>
                                     <div class="col-md-12">
-                                        <label class="card-header" for="csvfile">Escolha um Ficheiro Excel</label>
+                                        <label class="card-header" for="excelFile">Escolha um Ficheiro Excel</label>
                                         <div class="form-group">
-                                            <input type="file" class="form-control" id="csvfile" name="csvfile"
+                                            <input type="file" class="form-control" id="excelFile" name="excelFile"
                                                 required>
 
                                         </div>
 
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary"
-                                                id="btnUploadSingleFileSubmit">Carregar</button>
+                                                id="btnUploadSingleExcelFileSubmit">Carregar</button>
                                         </div>
                                     </div>
                                 </div>
