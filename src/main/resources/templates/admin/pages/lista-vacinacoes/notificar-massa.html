@@ -75,7 +75,7 @@
                                                 <label>Instituição</label>
                                                 <select id="customer" class="form-control select2" style="width: 100%;"
                                                     data-placeholder="Select" th:field="*{empresa}"
-                                                    onchange="SelectEmpresa()">
+                                                    onchange="SelectEmpresa()" required>
                                                     <option value="">Selecione</option>
                                                     <option th:each="i : ${customers}" th:value="${i.empresa}"
                                                         th:text="${i.empresa}">
@@ -87,7 +87,7 @@
                                                 <label>Sala</label>
                                                 <select id="salasEmpresa" class="form-control select2"
                                                     style="width: 100%;" data-placeholder="Select"
-                                                    th:field="*{salaVacinacao}">
+                                                    th:field="*{salaVacinacao}" required>
 
                                                     <option th:each="i : ${salaNomes}" th:value="${i.salaVacinacao}"
                                                         th:text="${i.salaVacinacao}">
@@ -99,7 +99,7 @@
                                                 <label>Estado</label>
                                                 <select id="keyword" name="keyword" class="form-control select2"
                                                     style="width: 100%;" data-placeholder="Select"
-                                                    th:field="*{estadoVacinacao}">
+                                                    th:field="*{estadoVacinacao}" required>
                                                     <!-- <option value="">Selecione</option> -->
                                                     <option th:value="1">Vacinado</option>
                                                     <option th:value="0">Nao Vacinado</option>
@@ -147,12 +147,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>Instituição</th>
-                                                    <th>Sala</th>
+
                                                     <th>Funcionário</th>
                                                     <th>Email</th>
                                                     <th>Telefone</th>
                                                     <th>Data de Vacinação</th>
                                                     <th>Hora</th>
+                                                    <th>Sala</th>
                                                     <th>Estado da Vacinação</th>
                                                     <!-- <th>Notificação</th> -->
                                                     <!-- <th>Accoes</th> -->

@@ -75,13 +75,29 @@
                         <div class="form-group">
                           <label>Nome Funcionario</label>
                           <input type="text" class="form-control select2" style="width: 100%;" id="exampleInputText"
-                            placeholder="Informe um nome" th:field="*{nome}">
+                            placeholder="Informe um nome" th:field="*{nome}" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Tipo de Documento</label>
+                          <select id="tipoDocumento" class="form-control select2" style="width: 100%;"
+                            th:field="*{tipoDocumento}" required>
+                            <option value="">Selecione</option>
+                            <option value="BI">Bilhete de Identidade</option>
+                            <option value="Carta de Conducao">Carta de Conducao</option>
+                            <option value="Dire">DIRE</option>
+                            <option value="Passaporte">Passaporte</option>
+                            <option value="Talao de BI">Talão de BI</option>
+                            <option value="Cartao de Eleitor">Cartão de Eleitor</option>
+
+
+                          </select>
                         </div>
 
                         <div class="form-group">
                           <label>Instituicao</label>
                           <select id="instituicao" class="form-control select2" style="width: 100%;"
-                            th:field="*{instituicao}">
+                            th:field="*{instituicao}" required>
                             <option value="">Selecione</option>
                             <option th:each="i : ${instituicoes}" th:value="${i.id}" th:text="${i.nome}">
                             </option>
@@ -91,22 +107,22 @@
                         <div class="form-group">
                           <label>Nacionalidade</label>
                           <input type="text" class="form-control select2" style="width: 100%;" id="exampleInputText"
-                            placeholder="Informe a nacionalidade" th:field="*{nacionalidade}">
+                            placeholder="Informe a nacionalidade" th:field="*{nacionalidade}" required>
                         </div>
                         <div class="form-group">
                           <label>Cidade</label>
                           <input type="text" class="form-control" id="exampleInputText" placeholder="Ex: Maputo"
-                            th:field="*{endereco.cidade}">
+                            th:field="*{endereco.cidade}" required>
                         </div>
                         <div class="form-group">
                           <label>Distrito</label>
                           <input type="text" class="form-control" id="exampleInputText" placeholder="Ex:Kamavota"
-                            th:field="*{endereco.distrito}">
+                            th:field="*{endereco.distrito}" required>
                         </div>
                         <div class="form-group">
                           <label>Numero da Casa</label>
                           <input type="number" class="form-control" id="exampleInputText" placeholder="Ex:123"
-                            th:field="*{endereco.numeroDeCasa}">
+                            th:field="*{endereco.numeroDeCasa}" required>
                         </div>
 
                         <!-- /.form-group -->
@@ -116,13 +132,20 @@
                         <div class="form-group">
                           <label>Data de Nascimento</label>
                           <input type="date" name="data-nasc" id="data-nasc" class="form-control"
-                            th:field="*{data_nasc}">
+                            th:field="*{data_nasc}" required>
+                        </div>
+
+                        <div class="form-group">
+                          <label>Numero do Documento</label>
+                          <input type="numeroDocumento" class="form-control select2" style="width: 100%;"
+                            id="exampleInputText" placeholder="Informe o numero do documento"
+                            th:field="*{numeroDocumento}" required>
                         </div>
 
                         <div class="form-group">
                           <label>E-mail</label>
                           <input type="email" class="form-control select2" style="width: 100%;" id="exampleInputText"
-                            placeholder="Informe um endereco Eletronico" th:field="*{email}">
+                            placeholder="Informe um endereco Eletronico" th:field="*{email}" required>
                         </div>
 
                         <!-- <div class="form-group">
@@ -135,7 +158,7 @@
                         <div class="form-group">
                           <label>Departamento</label>
                           <select id="departamento" class="form-control select2" style="width: 100%;"
-                            th:field="*{departamento}">
+                            th:field="*{departamento}" required>
                             <option value="">Selecione</option>
                             <option th:each="d : ${departamentos}" th:value="${d.id}" th:text="${d.nome}">RH
                             </option>
@@ -146,12 +169,12 @@
                         <div class="form-group">
                           <label>Bairro</label>
                           <input type="text" class="form-control" id="exampleInputText" placeholder="Ex:Magoanine"
-                            th:field="*{endereco.bairro}">
+                            th:field="*{endereco.bairro}" required>
                         </div>
                         <div class="form-group">
                           <label>Rua</label>
                           <input type="text" class="form-control" id="exampleInputText" placeholder="Ex:rua de caia"
-                            th:field="*{endereco.rua}">
+                            th:field="*{endereco.rua}" required>
                         </div>
 
 

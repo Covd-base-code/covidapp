@@ -42,11 +42,10 @@ public class Customer extends AbstractEntity<Long> {
     @Column(name = "telefone_gestor")
     private String telefoneGestor;
 
-
-    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
     private boolean notificar;
 
-    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
     private boolean estadoVacinacao;
 
     public Customer() {

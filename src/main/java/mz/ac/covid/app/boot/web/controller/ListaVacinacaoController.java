@@ -284,15 +284,16 @@ public class ListaVacinacaoController {
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
 
-  @GetMapping("estado")
-  public String estados(ModelMap model, RedirectAttributes atrr) {
+  @GetMapping("estado/{id}")
+  public String estados(@PathVariable("id") Long id, ModelMap model, RedirectAttributes atrr) {
 
-    Customer customer = customerRepository.getCustomerById(1L);
+    Customer customer = customerRepository.getCustomerById(id);
 
     customer.setEstadoVacinacao(true);
 
-    customerRepository.save(customer);
-
+    // customerRepository.save(customer);
+    customerService.editar(customer);
+    model.addAttribute("listavacinados", customerService.buscarTodos());
     atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
