@@ -75,7 +75,6 @@ public class ListaVacinacaoController {
   @Autowired
   private Service smsService;
 
-  public SmsSender sender;
   public List<Customer> filterdCustomers = new ArrayList<Customer>();
 
   @GetMapping("cadastrar")
@@ -381,19 +380,10 @@ public class ListaVacinacaoController {
 
     filterdCustomers.stream().forEach(customer -> {
 
-      // // Email to = new Email(customer.getEmail());
-      // Email to = new Email("daltonharvey.manusse@icloud.com");
       String message = "Funciona";
-      SmsRequest sms = new SmsRequest(customer.getTelefone(), message);
+      SmsRequest sms = new SmsRequest("+258860602588", message);
 
-      try {
-
-        sender.sendSms(sms);
-
-      } catch (IOException e) {
-
-        e.printStackTrace();
-      }
+      smsService.sendSms(sms);
 
     });
 
