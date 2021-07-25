@@ -2,8 +2,15 @@ package mz.ac.covid.app.boot.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.sendgrid.Email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -26,6 +33,7 @@ import mz.ac.covid.app.boot.service.FuncionarioService;
 import mz.ac.covid.app.boot.service.InstituicaoSalaService;
 import mz.ac.covid.app.boot.service.InstituicaoService;
 import mz.ac.covid.app.boot.service.ListaVacinacaoService;
+import mz.ac.covid.app.boot.service.MailService;
 import mz.ac.covid.app.boot.service.SalaService;
 
 @Controller
@@ -55,6 +63,9 @@ public class ListaVacinacaoController {
 
   @Autowired
   private CustomerService customerService;
+
+  @Autowired
+	MailService mailService;
 
   @GetMapping("cadastrar")
   public String cadastrar(ListaVacinacao listaVacinacao) {
@@ -150,19 +161,48 @@ public class ListaVacinacaoController {
    * 
    * @return
    */
-  @ModelAttribute("instituicoes")
-  public List<String> getAllInstitutions() {
+  @ModelAttribute("customers")
+  public List<Customer> getAllInstitutions() {
     return customerRepository.getAllInstitutions();
   }
-    /**
+
+  /**
    * Metodo para listar todas as isntituiceos e mostrar na combobox presente no
    * formulario dos dados carregados por excel
    * 
    * @return
    */
-  @ModelAttribute("salas")
-  public List<String> getAllSalas() {
-    return customerRepository.getAllSalas();
+
+  @RequestMapping(value = "/getSalaByEmpresa", method = RequestMethod.GET)
+  public @ResponseBody List<Customer> getAllSalas(@RequestParam("empresaName") String empresaName) {
+
+    List<Customer> salasByEmpresa = new ArrayList<Customer>();
+
+    salasByEmpresa = customerRepository.getAllSalas(empresaName);
+
+    if (salasByEmpresa.size() != 0)
+      return salasByEmpresa;
+    return null;
+  }
+
+  @RequestMapping(value = "/getAllCustomers/{empresaName}/{SalaName}", method = RequestMethod.GET)
+  public @ResponseBody List<Customer> getAllCustomers(@PathVariable("empresaName") String empresaName,
+      @PathVariable("SalaName") String SalaName) {
+
+    List<Customer> Customers = new ArrayList<Customer>();
+
+    Customers = customerRepository.getAllCustomers(empresaName, SalaName);
+
+
+    if (Customers.size() != 0)
+      return Customers;
+    return null;
+  }
+
+  @ModelAttribute("salaNomes")
+  public List<Customer> _getAllSala() {
+    List<Customer> salasByEmpresa = new ArrayList<Customer>();
+    return salasByEmpresa;
   }
 
   /**
@@ -243,12 +283,34 @@ public class ListaVacinacaoController {
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
 
-  @GetMapping("estado/{id}")
-  public String estados(ModelMap model, @PathVariable("id") Long id, boolean estado, RedirectAttributes atrr) {
-    Customer customer = customerService.buscarPorId(id);
-    customer.setEstadoVacinacao(estado);
+  @GetMapping("estado")
+  public String estados(ModelMap model, RedirectAttributes atrr) {
+   
+    Customer customer = customerRepository.getCustomerById(1L);
+
+    customer.setEstadoVacinacao(true);
+
+    customerRepository.save(customer);
+
     atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
+
+
+	
+	@GetMapping("/send/{id}")
+	public String send(ModelMap model, @PathVariable("id") Long id,RedirectAttributes atrr) throws IOException {
+
+    Customer customer = customerRepository.getCustomerById(id);
+
+    Email to = new Email(customer.getEmail());
+		
+    mailService.sendTextEmail(to);
+
+    this.vacinados(model);
+
+    atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
+    return "admin/pages/lista-vacinacoes/list-vacinados";
+	}
 
 }

@@ -66,6 +66,13 @@
     <version>4.5</version>
 </dependency>
 
+		<!-- sendgrid -->
+<dependency>
+  <groupId>com.sendgrid</groupId>
+  <artifactId>sendgrid-java</artifactId>
+  <version>4.0.1</version>
+</dependency>
+
 <dependency>
 	<groupId>org.apache.poi</groupId>
 	<artifactId>poi-ooxml</artifactId>

@@ -35,13 +35,13 @@ public class InstituicaoController {
 	@GetMapping("cadastrar")
 	public String cadastrar(Instituicao instituicao) {
 
-		return "/admin/pages/instituicoes/add-instituicao";
+		return "admin/pages/instituicoes/add-instituicao";
 	}
 
 	@GetMapping("listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("instituicoes", instituicaoService.pesquisarTodos());
-		return "/admin/pages/instituicoes/list-instituicao";
+		return "admin/pages/instituicoes/list-instituicao";
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class InstituicaoController {
 	public String preActualizar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("instituicao", instituicaoService.pesquisarPorId(id));
 
-		return "/admin/pages/instituicoes/add-instituicao";
+		return "admin/pages/instituicoes/add-instituicao";
 	}
 
 	@PostMapping("editar")

@@ -4,14 +4,23 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import mz.ac.covid.app.boot.domain.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query(value="SELECT empresa FROM customer GROUP BY empresa", nativeQuery = true)
-    public List<String> getAllInstitutions();
 
-    @Query(value="SELECT sala_vacinacao FROM customer GROUP BY sala_vacinacao", nativeQuery = true)
-    public List<String> getAllSalas();
-}
+    @Query(value="SELECT * FROM customer GROUP BY empresa", nativeQuery = true)
+    public List<Customer> getAllInstitutions();
+
+    @Query(value="SELECT * FROM customer WHERE empresa=:empresaName GROUP BY sala_vacinacao", nativeQuery = true)
+    public List<Customer> getAllSalas(@Param("empresaName") String empresaName);
+
+    @Query(value="SELECT * FROM customer WHERE empresa=:empresaName AND sala_vacinacao=:SalaNumber", nativeQuery = true)
+    public List<Customer> getAllCustomers(@Param("empresaName") String empresaName, @Param("SalaNumber") String SalaNumber);
+
+    @Query(value="SELECT * FROM customer WHERE id=:Id", nativeQuery = true)
+    public Customer getCustomerById(@Param("Id") Long Id);
+
+  }
