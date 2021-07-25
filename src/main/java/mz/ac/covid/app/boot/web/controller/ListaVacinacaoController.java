@@ -37,6 +37,9 @@ import mz.ac.covid.app.boot.service.InstituicaoService;
 import mz.ac.covid.app.boot.service.ListaVacinacaoService;
 import mz.ac.covid.app.boot.service.MailService;
 import mz.ac.covid.app.boot.service.SalaService;
+import mz.ac.covid.app.boot.service.Service;
+import mz.ac.covid.app.boot.service.SmsRequest;
+import mz.ac.covid.app.boot.service.SmsSender;
 
 @Controller
 @RequestMapping("/vacinacoes")
@@ -69,6 +72,10 @@ public class ListaVacinacaoController {
   @Autowired
   MailService mailService;
 
+  @Autowired
+  private Service smsService;
+
+  public SmsSender sender;
   public List<Customer> filterdCustomers = new ArrayList<Customer>();
 
   @GetMapping("cadastrar")
@@ -352,7 +359,7 @@ public class ListaVacinacaoController {
     filterdCustomers.stream().forEach(customer -> {
 
       // Email to = new Email(customer.getEmail());
-      Email to = new Email("daltonharvey.manusse@icloud.com");
+      Email to = new Email("helderjosuemata@icloud.com");
 
       try {
 
@@ -365,19 +372,33 @@ public class ListaVacinacaoController {
 
     });
 
-    atrr.addFlashAttribute("success", "Notificação enviada com sucesso!.");
+    atrr.addFlashAttribute("success", "Notificação enviada com sucesso!");
     return "redirect:/vacinacoes/notificar";
   }
 
-  // @RequestMapping("tentar")
-  // public String viewHomePage(Customer customer, Model model, @Param("keyword")
-  // Integer keyword) {
-  // List<Customer> listVacinados = customerRepository.search(keyword);
+  @GetMapping("/sendAllSms")
+  public String sendAllSms(RedirectAttributes atrr) throws IOException {
 
-  // model.addAttribute("notificados", customerRepository.search(keyword));
-  // // model.addAttribute("keyword", keyword);
+    filterdCustomers.stream().forEach(customer -> {
 
-  // return "/admin/pages/lista-vacinacoes/notificar-massa";
-  // }
+      // // Email to = new Email(customer.getEmail());
+      // Email to = new Email("daltonharvey.manusse@icloud.com");
+      String message = "Funciona";
+      SmsRequest sms = new SmsRequest(customer.getTelefone(), message);
+
+      try {
+
+        sender.sendSms(sms);
+
+      } catch (IOException e) {
+
+        e.printStackTrace();
+      }
+
+    });
+
+    atrr.addFlashAttribute("success", "Notificação enviada com sucesso!.");
+    return "redirect:/vacinacoes/notificar";
+  }
 
 }
