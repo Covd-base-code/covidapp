@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UJC | Adicionar Requisições</title>
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -30,6 +30,15 @@
     <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <style>
+      .changeDisplay {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center
+      }
+    </style>
   </head>
 
   <body class="hold-transition sidebar-mini">
@@ -62,58 +71,26 @@
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Atribuição de Sala</h3>
+                  <h3 class="card-title">Instituição com Requisição</h3>
                 </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form th:action="${listaVacinacao.id == null} ? @{/vacinacoes/gravar} : @{/vacinacoes/editar}"
-                  th:object="${listaVacinacao}" method="POST">
-                  <div class="card-body">
 
-                    <div class="form-group">
-                      <label>Sala</label>
-                      <select id="sala" class="form-control select2" style="width: 100%;" th:field="*{sala}">
-                        <option value="">Selecione</option>
-                        <option th:each="s : ${salas}" th:value="${s.id}" th:text="${s.nome}">
-                      </select>
-                    </div>
+                <form th:action="@{/vacinacoes/pesquisar/{id} (id=1)}" method="GET" th:object="${listaVacinacao}">
+                  <div class="card-body">
 
                     <div class="form-group">
                       <label>Instituição</label>
                       <select id="instituicao" class="form-control select2" style="width: 100%;"
                         th:field="*{instituicao}">
                         <option value="">Selecione</option>
-                        <option th:each="i : ${instituicoes}" th:value="${i.id}" th:text="${i.nome}">
+                        <option name="instituicaoId" th:each="i : ${instituicoess}" th:value="${i.instituicao.id}"
+                          th:text="${i.instituicao.nome}">
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label>Funcionarios</label>
-                      <select id="funcionario" class="select2" multiple="multiple"
-                        data-placeholder="Selecione varios funcionarios" style="width: 100%;" th:field="*{funcionario}">
-                        <option value="">Selecione</option>
-                        <option th:each="f : ${funcionarios}" th:value="${f.id}" th:text="${f.nome}"></option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Data de Inicio</label>
-                      <input type="date" name="data-nasc" id="data-nasc" class="form-control" th:field="*{data_inicio}">
-                    </div>
-
-                    <div class="form-group">
-                      <label>Data de Termino</label>
-                      <input type="date" name="data-nasc" id="data-nasc" class="form-control"
-                        th:field="*{data_termino}">
-                    </div>
                     <div class="form-group">
                       <input type="hidden" name="id" th:field="*{id}">
                     </div>
-                  </div>
-                  <!-- /.card-body -->
-
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submeter</button>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
                   </div>
                 </form>
               </div>
@@ -123,10 +100,72 @@
 
             <!-- left column -->
 
+            <div class="col-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Atribuição de Sala</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form th:action="${listaVacinacao.id == null} ? @{/vacinacoes/gravar} : @{/vacinacoes/editar}"
+                  th:object="${listaVacinacao}" method="POST">
+                  <div class="card-body">
+
+                    <div class="form-group">
+                      <label>Instituição</label>
+                      <select id="instituicao" class="form-control select2" style="width: 100%;"
+                        th:field="*{instituicao}" required>
+                        <option value="">Selecione</option>
+                        <option name="instituicaoId" th:each="i : ${funcionariosDaInstituicao}"
+                          th:value="${i.instituicao.id}" th:text="${i.instituicao.nome}">
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Sala</label>
+                      <select id="sala" class="form-control select2" style="width: 100%;" th:field="*{sala}" required>
+                        <option value="">Selecione</option>
+                        <!-- <option th:each="si : ${salas}" th:value="${si.id}" th:text="${si.nome}"> -->
+                        <option th:each="si : ${funcionariosDaInstituicao}" th:value="${si.sala}"
+                          th:text="${si.sala.nome}">
+                      </select>
+                    </div>
+
+
+
+                    <div class="form-group">
+                      <label>Funcionarios</label>
+                      <select id="funcionario" class="select2" multiple="multiple"
+                        data-placeholder="Selecione varios funcionarios" style="width: 100%;" th:field="*{funcionario}">
+                        <option value="">Selecione</option>
+                        <!-- <option th:each="f : ${funcionarios}" th:value="${f.id}" th:text="${f.nome}"></option> -->
+                        <option th:each="f : ${funcionariosDaInstituicao}" th:value="${f.id}" th:text="${f.nome}"
+                          required>
+                        </option>
+
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="hidden" name="id" th:field="*{id}">
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submeter</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+
+
+            </div>
 
           </div>
-
-        </div>
 
 
       </section>

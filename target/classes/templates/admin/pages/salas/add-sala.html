@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>UJC | Adicionar Faculdade</title>
+
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet"
@@ -73,12 +73,13 @@
                                                 <div class="form-group">
                                                     <label>Nome</label>
                                                     <input type="text" class="form-control" id="nomeSala"
-                                                        placeholder="Nome da Sala" th:field="*{nome}">
+                                                        placeholder="Nome da Sala" th:field="*{nome}" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Lotação</label>
                                                     <input type="text" class="form-control" id="lotacao"
-                                                        placeholder="Informe uma lotacao maxima" th:field="*{lotacao}">
+                                                        placeholder="Informe uma lotacao maxima" th:field="*{lotacao}"
+                                                        required>
                                                 </div>
                                                 <!-- /.form-group -->
 

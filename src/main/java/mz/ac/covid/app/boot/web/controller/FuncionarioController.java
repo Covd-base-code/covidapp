@@ -91,6 +91,7 @@ public class FuncionarioController {
      */
     @PostMapping("gravar")
     public String gravar(Funcionario funcionario, RedirectAttributes atrr) {
+      
         funcionarioService.registar(funcionario);
         atrr.addFlashAttribute("success", "Funcionario cadastrado com sucesso.");
         return "redirect:/funcionarios/cadastrar";

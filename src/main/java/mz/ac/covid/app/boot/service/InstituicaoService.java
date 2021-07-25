@@ -6,9 +6,9 @@ import mz.ac.covid.app.boot.domain.Instituicao;
 
 public interface InstituicaoService {
 
-	void registar(Instituicao cargo);
+	void registar(Instituicao instituicao);
 
-	void editar(Instituicao cargo);
+	void editar(Instituicao instituicao);
 
 	void apagar(Long id);
 

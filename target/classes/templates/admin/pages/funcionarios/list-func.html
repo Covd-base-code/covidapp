@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UJC | Funcionarios</title>
+
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -29,7 +29,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Funcionarios da UJC</h1>
+                <h1>Funcionarios</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -191,7 +191,7 @@
       var url = "";
 
       $('button[id*="btn"]').click(function () {
-        url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+        url = "http://localhost:8082/" + $(this).attr('id').split("_")[1];
       });
 
       $('#ok_confirm').click(function () {

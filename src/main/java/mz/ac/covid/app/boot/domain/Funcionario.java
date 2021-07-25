@@ -1,7 +1,6 @@
 package mz.ac.covid.app.boot.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,6 +22,15 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(name = "data_nascimento", nullable = false, columnDefinition = "DATE")
 	private Date data_nasc;
 
+	@Column(name = "tipo_documento")
+	private String tipoDocumento;
+
+	@Column(name = "numero_documento")
+	private String numeroDocumento;
+
+	@Column(name = "genero")
+	private String sexo;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk", nullable = false)
 	private Endereco endereco;
@@ -35,11 +43,13 @@ public class Funcionario extends AbstractEntity<Long> {
 	@JoinColumn(name = "instituicao_id_fk")
 	private Instituicao instituicao;
 
-	@OneToMany(mappedBy = "funcionario")
-	private List<Telefone> telefones;
+	@Column(name = "contacto")
+	private String telefone;
 
 	@Column(name = "email")
 	private String email;
+
+	// add chave de lista de vacinacao
 
 	public String getNome() {
 		return nome;
@@ -55,6 +65,22 @@ public class Funcionario extends AbstractEntity<Long> {
 
 	public void setData_nasc(Date data_nasc) {
 		this.data_nasc = data_nasc;
+	}
+
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
 	}
 
 	public Endereco getEndereco() {
@@ -89,12 +115,12 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.instituicao = instituicao;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getEmail() {

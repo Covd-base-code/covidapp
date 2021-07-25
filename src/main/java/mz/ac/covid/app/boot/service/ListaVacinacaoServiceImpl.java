@@ -13,26 +13,26 @@ import mz.ac.covid.app.boot.domain.ListaVacinacao;
 @Service
 @Transactional(readOnly = false)
 public class ListaVacinacaoServiceImpl implements ListaVacinacaoService {
-  
+
   @Autowired(required = false)
   private ListaVacinacaoDao dao;
 
   @Override
   public void registar(ListaVacinacao listaVacinacao) {
     dao.save(listaVacinacao);
-    
+
   }
 
   @Override
   public void editar(ListaVacinacao listaVacinacao) {
     dao.update(listaVacinacao);
-    
+
   }
 
   @Override
   public void apagar(Long id) {
     dao.delete(id);
-    
+
   }
 
   @Override
@@ -45,5 +45,5 @@ public class ListaVacinacaoServiceImpl implements ListaVacinacaoService {
   public List<ListaVacinacao> pesquisarTodos() {
     return dao.findAll();
   }
-  
+
 }
