@@ -132,22 +132,22 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <div th:replace="fragments/alert"></div>
+
                                         <table id="example1" class="table table-bordered table-striped">
                                             <div class="card-footer">
                                                 <!-- <button type="submit" class="btn btn-primary">Notificar</button> -->
                                                 <a href="#" class="btn btn-primary" role="button" id="downloadcsvfile"
                                                     style="float: right; margin-left: 10px;">
-                                                    Notificar Por SMS</a>
+                                                    Notificar Por SMS <i class="fas fa-sms"></i></a>
 
-                                                <a href="#" class="btn btn-primary" role="button" id="downloadcsvfile"
+                                                <a th:href="@{/vacinacoes/sendAllEmails}" class="btn btn-primary"
+                                                    role="button" id="sendAllEmails"
                                                     style="float: right; margin-left: 10px;">
-                                                    Notificar Por Email</a>
+                                                    Notificar Por Email <i class="fas fa-envelope"></i></a>
                                             </div>
                                             <thead>
                                                 <tr>
                                                     <th>Instituição</th>
-
                                                     <th>Funcionário</th>
                                                     <th>Email</th>
                                                     <th>Telefone</th>
@@ -169,7 +169,6 @@
                                                     <td th:text="${lv.horaVacinacao}"></td>
                                                     <td th:text="${lv.salaVacinacao}"></td>
                                                     <td th:text="${lv.estadoVacinacao}">
-
                                                     </td>
                                                     <!-- <td>
                                                         <button th:onclick="|window.location.href='/vacinacoes/estado'|"
@@ -184,7 +183,6 @@
                                        
                                                             </i> Notificar
                                                         </button>
-
                                                     </td> -->
 
                                                 </tr>

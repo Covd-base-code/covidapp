@@ -23,18 +23,19 @@ public class MailService {
     // Verification
     Email from = new Email("hello@bit.co.mz");
 
-    String subject = "Dont Repay: SMM Covid App";
+    String subject = "Notificação de Vacinação: SMM Covid App";
 
     // Email to = new Email("daltonharvey.manusse@icloud.com");
 
-    Content content = new Content("text/plain", "Hello This is Just a Test");
+    Content content = new Content("text/plain",
+        "Saudações Cordiais, informamos que devera fazer-se presente no dia 21-08-2021, das 8 - 9h para tomar a sua segunda dose da vacina contra o Covid-19. Apresente o seu documento de identificação na entrada. Obrigado!");
 
     Mail mail = new Mail(from, subject, to, content);
 
     SendGrid sg = new SendGrid("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");
-    
+
     Request request = new Request();
-    
+
     try {
       request.setMethod(Method.POST);
       request.setEndpoint("mail/send");

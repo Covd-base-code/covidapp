@@ -312,7 +312,7 @@ public class ListaVacinacaoController {
     this.vacinados(model);
 
     atrr.addFlashAttribute("success", "Notificacao enviada com sucesso!.");
-    return "admin/pages/lista-vacinacoes/list-vacinados";
+    return "redirect:/lista-vacinacoes/list-vacinados";
   }
 
   /** FASE DE TESTE DE NOTIFICACAO EM MASSA */
@@ -330,8 +330,6 @@ public class ListaVacinacaoController {
     boolean estado = customer.getEstadoVacinacao();
     String instituicao = customer.getEmpresa();
     String sala = customer.getSalaVacinacao();
-
-   
 
     if (estado == false) {
 
@@ -352,24 +350,23 @@ public class ListaVacinacaoController {
   public String sendForAllEmails(RedirectAttributes atrr) throws IOException {
 
     filterdCustomers.stream().forEach(customer -> {
-      
-      Email to = new Email(customer.getEmail());
+
+      // Email to = new Email(customer.getEmail());
+      Email to = new Email("daltonharvey.manusse@icloud.com");
 
       try {
 
         mailService.sendTextEmail(to);
 
       } catch (IOException e) {
-        
+
         e.printStackTrace();
       }
 
     });
 
-    
-
-    atrr.addFlashAttribute("success", "Notificacao enviada com sucesso!.");
-    return "admin/pages/lista-vacinacoes/list-vacinados";
+    atrr.addFlashAttribute("success", "Notificação enviada com sucesso!.");
+    return "redirect:/vacinacoes/notificar";
   }
 
   // @RequestMapping("tentar")
