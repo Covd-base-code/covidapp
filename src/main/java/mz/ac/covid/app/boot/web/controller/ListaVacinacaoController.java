@@ -69,6 +69,8 @@ public class ListaVacinacaoController {
   @Autowired
   MailService mailService;
 
+  public List<Customer> filterdCustomers = new ArrayList<Customer>();
+
   @GetMapping("cadastrar")
   public String cadastrar(ListaVacinacao listaVacinacao) {
 
@@ -329,15 +331,45 @@ public class ListaVacinacaoController {
     String instituicao = customer.getEmpresa();
     String sala = customer.getSalaVacinacao();
 
+   
+
     if (estado == false) {
 
-      model.addAttribute("notificados", customerRepository.search(0, instituicao, sala));
+      filterdCustomers = customerRepository.search(0, instituicao, sala);
+
+      model.addAttribute("notificados", filterdCustomers);
       return "/admin/pages/lista-vacinacoes/notificar-massa";
     } else {
 
-      model.addAttribute("notificados", customerRepository.search(1, instituicao, sala));
+      filterdCustomers = customerRepository.search(0, instituicao, sala);
+
+      model.addAttribute("notificados", filterdCustomers);
       return "/admin/pages/lista-vacinacoes/notificar-massa";
     }
+  }
+
+  @GetMapping("/sendAllEmails")
+  public String sendForAllEmails(RedirectAttributes atrr) throws IOException {
+
+    filterdCustomers.stream().forEach(customer -> {
+      
+      Email to = new Email(customer.getEmail());
+
+      try {
+
+        mailService.sendTextEmail(to);
+
+      } catch (IOException e) {
+        
+        e.printStackTrace();
+      }
+
+    });
+
+    
+
+    atrr.addFlashAttribute("success", "Notificacao enviada com sucesso!.");
+    return "admin/pages/lista-vacinacoes/list-vacinados";
   }
 
   // @RequestMapping("tentar")
