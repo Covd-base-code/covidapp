@@ -22,6 +22,15 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(name = "data_nascimento", nullable = false, columnDefinition = "DATE")
 	private Date data_nasc;
 
+	@Column(name = "tipo_documento")
+	private String tipoDocumento;
+
+	@Column(name = "numero_documento")
+	private String numeroDocumento;
+
+	@Column(name = "genero")
+	private String sexo;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id_fk", nullable = false)
 	private Endereco endereco;
@@ -56,6 +65,22 @@ public class Funcionario extends AbstractEntity<Long> {
 
 	public void setData_nasc(Date data_nasc) {
 		this.data_nasc = data_nasc;
+	}
+
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
 	}
 
 	public Endereco getEndereco() {

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mz.ac.covid.app.boot.dao.CustomerDao;
 import mz.ac.covid.app.boot.domain.Customer;
+import mz.ac.covid.app.boot.repository.CustomerRepository;
 
 @Service
 @Transactional(readOnly = false)

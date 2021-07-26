@@ -13,6 +13,8 @@ import java.util.List;
 import com.sendgrid.Email;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -65,7 +67,7 @@ public class ListaVacinacaoController {
   private CustomerService customerService;
 
   @Autowired
-	MailService mailService;
+  MailService mailService;
 
   @GetMapping("cadastrar")
   public String cadastrar(ListaVacinacao listaVacinacao) {
@@ -193,7 +195,6 @@ public class ListaVacinacaoController {
 
     Customers = customerRepository.getAllCustomers(empresaName, SalaName);
 
-
     if (Customers.size() != 0)
       return Customers;
     return null;
@@ -283,34 +284,71 @@ public class ListaVacinacaoController {
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
 
-  @GetMapping("estado")
-  public String estados(ModelMap model, RedirectAttributes atrr) {
-   
-    Customer customer = customerRepository.getCustomerById(1L);
+  @GetMapping("estado/{id}")
+  public String estados(@PathVariable("id") Long id, ModelMap model, RedirectAttributes atrr) {
+
+    Customer customer = customerRepository.getCustomerById(id);
 
     customer.setEstadoVacinacao(true);
 
-    customerRepository.save(customer);
-
+    // customerRepository.save(customer);
+    customerService.editar(customer);
+    model.addAttribute("listavacinados", customerService.buscarTodos());
     atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
     return "/admin/pages/lista-vacinacoes/list-vacinados";
   }
 
-
-	
-	@GetMapping("/send/{id}")
-	public String send(ModelMap model, @PathVariable("id") Long id,RedirectAttributes atrr) throws IOException {
+  @GetMapping("/send/{id}")
+  public String send(ModelMap model, @PathVariable("id") Long id, RedirectAttributes atrr) throws IOException {
 
     Customer customer = customerRepository.getCustomerById(id);
 
     Email to = new Email(customer.getEmail());
-		
+
     mailService.sendTextEmail(to);
 
     this.vacinados(model);
 
-    atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
+    atrr.addFlashAttribute("success", "Notificacao enviada com sucesso!.");
     return "admin/pages/lista-vacinacoes/list-vacinados";
-	}
+  }
+
+  /** FASE DE TESTE DE NOTIFICACAO EM MASSA */
+
+  @GetMapping("notificar")
+  public String notificar(Customer customer) {
+
+    // instituicaoSalaService.registar(instituicaoSala);
+    // atrr.addFlashAttribute("success", "Requisição feita com sucesso.");
+    return "/admin/pages/lista-vacinacoes/notificar-massa";
+  }
+
+  @PostMapping("filtrar")
+  public String tentar(Customer customer, ModelMap model) {
+    boolean estado = customer.getEstadoVacinacao();
+    String instituicao = customer.getEmpresa();
+    String sala = customer.getSalaVacinacao();
+
+    if (estado == false) {
+
+      model.addAttribute("notificados", customerRepository.search(0, instituicao, sala));
+      return "/admin/pages/lista-vacinacoes/notificar-massa";
+    } else {
+
+      model.addAttribute("notificados", customerRepository.search(1, instituicao, sala));
+      return "/admin/pages/lista-vacinacoes/notificar-massa";
+    }
+  }
+
+  // @RequestMapping("tentar")
+  // public String viewHomePage(Customer customer, Model model, @Param("keyword")
+  // Integer keyword) {
+  // List<Customer> listVacinados = customerRepository.search(keyword);
+
+  // model.addAttribute("notificados", customerRepository.search(keyword));
+  // // model.addAttribute("keyword", keyword);
+
+  // return "/admin/pages/lista-vacinacoes/notificar-massa";
+  // }
 
 }
