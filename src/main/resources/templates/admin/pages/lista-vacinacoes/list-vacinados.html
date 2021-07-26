@@ -190,7 +190,7 @@
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
 
-  <script>
+  <!-- <script>
 
     $(function () {
       $("#example1").DataTable({
@@ -227,30 +227,30 @@
         $(".sidebar").toggleClass("sidebar-open");
       })
     });
-  </script>
+  </script> -->
   <!-- Page specific script -->
 
   <th:block layout:fragment="javascript-extra">
 
     <script th:inline="javascript">
 
-      $(function () {
+      // $(function () {
 
-        $("#example1").DataTable({
-          "responsive": true, "lengthChange": false, "autoWidth": false,
-          "buttons": ["excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false,
-          "responsive": true,
-        });
+      //   $("#example1").DataTable({
+      //     "responsive": true, "lengthChange": false, "autoWidth": false,
+      //     "buttons": ["excel", "pdf", "print"]
+      //   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      //   $('#example2').DataTable({
+      //     "paging": true,
+      //     "lengthChange": false,
+      //     "searching": false,
+      //     "ordering": true,
+      //     "info": true,
+      //     "autoWidth": false,
+      //     "responsive": true,
+      //   });
 
-      });
+      // });
 
 
 
@@ -337,7 +337,6 @@
 
         customersFilters.forEach((customer, index) => {
 
-          console.log(customer);
           var row = ` <tbody>
                       <tr>
                         <td>${customer.nome}</td>
@@ -349,6 +348,18 @@
                         <td>${customer.salaVacinacao}</td>
                         <td>${customer.telefoneGestor}</td>
                         <td>${customer.estadoVacinacao}</td>
+
+                        <td>
+                          <button  type="button"
+                            class="btn btn-info btn-sm" data-toggle="popover" title="funcionarios">
+                            Vacinar
+                          </button> <br><br>
+                          <button type="button"
+                            class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+                            </i> Notificar
+                          </button>
+
+                        </td>
                       </tr>
                       </tbody>
                     `
