@@ -380,8 +380,8 @@ public class ListaVacinacaoController {
 
     filterdCustomers.stream().forEach(customer -> {
 
-      String message = "Funciona";
-      SmsRequest sms = new SmsRequest("+258860602588", message);
+      String message = "Voce foi convidado para vacinar na SMM";
+      SmsRequest sms = new SmsRequest(customer.getTelefone(), message);
 
       smsService.sendSms(sms);
 
