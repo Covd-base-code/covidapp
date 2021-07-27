@@ -84,14 +84,14 @@ public class ListaVacinacaoController {
 
   @GetMapping("submeter")
   public String submeter() {
-    return "/admin/pages/lista-vacinacoes/add-excel";
+    return "admin/pages/lista-vacinacoes/add-excel";
   }
 
   @GetMapping("listar")
   public String listar(ModelMap model) {
     model.addAttribute("listavacinacoes", listaVacinacaoService.pesquisarTodos());
 
-    return "/admin/pages/lista-vacinacoes/list-vacinacoes";
+    return "admin/pages/lista-vacinacoes/list-vacinacoes";
   }
 
   /**
@@ -241,7 +241,7 @@ public class ListaVacinacaoController {
   @GetMapping("requisitar")
   public String requisitar(InstituicaoSala instituicaoSala) {
 
-    return "/admin/pages/lista-vacinacoes/add-requisitar-sala";
+    return "admin/pages/lista-vacinacoes/add-requisitar-sala";
   }
 
   /**
@@ -289,7 +289,7 @@ public class ListaVacinacaoController {
   @GetMapping("listar-vacinados")
   public String vacinados(ModelMap model) {
     model.addAttribute("listavacinados", customerService.buscarTodos());
-    return "/admin/pages/lista-vacinacoes/list-vacinados";
+    return "admin/pages/lista-vacinacoes/list-vacinados";
   }
 
   @GetMapping("estado/{id}")
@@ -303,7 +303,7 @@ public class ListaVacinacaoController {
     customerService.editar(customer);
     model.addAttribute("listavacinados", customerService.buscarTodos());
     atrr.addFlashAttribute("success", "Estado alterado com sucesso!.");
-    return "/admin/pages/lista-vacinacoes/list-vacinados";
+    return "admin/pages/lista-vacinacoes/list-vacinados";
   }
 
   @GetMapping("/send/{id}")
@@ -328,7 +328,7 @@ public class ListaVacinacaoController {
 
     // instituicaoSalaService.registar(instituicaoSala);
     // atrr.addFlashAttribute("success", "Requisição feita com sucesso.");
-    return "/admin/pages/lista-vacinacoes/notificar-massa";
+    return "admin/pages/lista-vacinacoes/notificar-massa";
   }
 
   @PostMapping("filtrar")
@@ -342,13 +342,13 @@ public class ListaVacinacaoController {
       filterdCustomers = customerRepository.search(0, instituicao, sala);
 
       model.addAttribute("notificados", filterdCustomers);
-      return "/admin/pages/lista-vacinacoes/notificar-massa";
+      return "admin/pages/lista-vacinacoes/notificar-massa";
     } else {
 
       filterdCustomers = customerRepository.search(0, instituicao, sala);
 
       model.addAttribute("notificados", filterdCustomers);
-      return "/admin/pages/lista-vacinacoes/notificar-massa";
+      return "admin/pages/lista-vacinacoes/notificar-massa";
     }
   }
 
