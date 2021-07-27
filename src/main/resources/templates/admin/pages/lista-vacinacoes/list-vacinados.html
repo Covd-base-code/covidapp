@@ -192,9 +192,13 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-    <script>
+    <!-- Page specific script -->
 
-      $(function () {
+    <th:block layout:fragment="javascript-extra">
+
+      <script th:inline="javascript">
+
+        $(function () {
         $("#example1").DataTable({
           "responsive": true, "lengthChange": false, "autoWidth": false
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -212,7 +216,7 @@
       var url = "";
 
       $('button[id*="btn"]').click(function () {
-        url = "http://localhost:8082/" + $(this).attr('id').split("_")[1];
+        url = "https://clinic-covid-app.herokuapp.com/" + $(this).attr('id').split("_")[1];
       });
 
       $('#ok_confirm').click(function () {
@@ -229,31 +233,6 @@
           $(".sidebar").toggleClass("sidebar-open");
         })
       });
-    </script>
-    <!-- Page specific script -->
-
-    <th:block layout:fragment="javascript-extra">
-
-      <script th:inline="javascript">
-
-        $(function () {
-
-          $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["excel", "pdf", "print"]
-          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-          $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-          });
-
-        });
-
 
 
         /*<![CDATA[*/
@@ -370,20 +349,6 @@
 
           });
 
-          $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["excel", "pdf", "print"]
-
-          }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-          $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-          });
 
           // var path = window.location.href.split('vacinacoes/')[0];
           // var _empresaNameParam = 'empresaName=' + encodeURIComponent(empresaSelectVealue);
