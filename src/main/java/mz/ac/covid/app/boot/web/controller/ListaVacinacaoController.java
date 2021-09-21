@@ -357,8 +357,8 @@ public class ListaVacinacaoController {
 
     filterdCustomers.stream().forEach(customer -> {
 
-      // Email to = new Email(customer.getEmail());
-      Email to = new Email("helderjosuemata@icloud.com");
+      Email to = new Email(customer.getEmail());
+      //Email to = new Email("helderjosuemata@icloud.com");
 
       try {
 
