@@ -46,7 +46,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li class="breadcrumb-item"><a href="#" style="color: red;">Inicio</a></li>
                   <li class="breadcrumb-item active">Adicionar Departamento</li>
                 </ol>
               </div>
@@ -63,7 +63,7 @@
 
               <form th:action="${departamento.id == null} ? @{/departamentos/gravar} : @{/departamentos/editar}"
                 th:object="${departamento}" method="POST">
-                <div class="card card-primary" style="margin-left: 450px; width: 100%;padding: 10px;">
+                <div class="card card-danger" style="margin-left: 450px; width: 100%;padding: 10px;">
                   <div class="card-header">
                     <h3 class="card-title">Detalhes do Departamento</h3>
                   </div>
@@ -93,7 +93,7 @@
 
 
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary" onclick=alerta()>Submeter</button>
+                      <button type="submit" class="btn btn-danger" onclick=alerta()>Submeter</button>
                     </div>
                     <!-- /.row -->
                   </div>

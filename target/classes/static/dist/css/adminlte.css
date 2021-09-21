@@ -4567,7 +4567,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #007bff;
+  background-color: #dc3545;
 }
 
 .nav-fill > .nav-link,
@@ -5374,7 +5374,7 @@ input[type="button"].btn-block {
   margin-left: -1px;
   line-height: 1.25;
   color: #007bff;
-  background-color: #fff;
+  background-color: #dc3545;
   border: 1px solid #dee2e6;
 }
 
@@ -5404,18 +5404,19 @@ input[type="button"].btn-block {
 }
 
 .page-item.active .page-link {
+  /*  */
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
 .page-item.disabled .page-link {
   color: #6c757d;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
-  border-color: #dee2e6;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
 .pagination-lg .page-link {
@@ -13524,7 +13525,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
-  background-color: #007bff;
+  /* CHANGES THE COLOR OF THE SIDEBAR LIKES WHEN ACTIVE */
+  background-color: #dc3545;
   color: #fff;
 }
 
@@ -18590,7 +18592,7 @@ body.text-sm .control-sidebar {
 }
 
 .navbar-white {
-  background-color:  #0098F7;
+  background-color:  #dc3545;
   color: white;
 }
 
@@ -21858,7 +21860,7 @@ body.text-sm .control-sidebar {
 }
 
 .dark-mode .page-item.active .page-link {
-  background-color: #3f6791;
+  background-color: #dc3545;
   color: #fff;
 }
 
@@ -47485,7 +47487,7 @@ a.text-muted:hover {
 
 .accent-secondary .page-item.active a,
 .accent-secondary .page-item.active .page-link {
-  background-color: #6c757d;
+  background-color: #dc3545;
   border-color: #6c757d;
   color: #fff;
 }

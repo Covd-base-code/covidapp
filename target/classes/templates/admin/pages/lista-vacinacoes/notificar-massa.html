@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                    <li class="breadcrumb-item"><a href="#" style="color: red;">Inicio</a></li>
                                     <li class="breadcrumb-item active">Enviar Notificação</li>
                                 </ol>
                             </div>
@@ -64,7 +64,7 @@
                             <!-- SELECT2 EXAMPLE -->
                             <div class="col-12">
                                 <!-- general form elements -->
-                                <div class="card card-primary">
+                                <div class="card card-danger">
                                     <div class="card-header">
                                         <h3 class="card-title">Instituição com Requisição</h3>
                                     </div>
@@ -114,7 +114,7 @@
                                             </div>
 
                                             <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary"
+                                                <button type="submit" class="btn btn-danger"
                                                     id="btnGetAllCustomerSubmit">Pesquisar</button>
                                             </div>
 
@@ -126,7 +126,7 @@
                             </div>
 
                             <div class="col-12">
-                                <div class="card card-primary">
+                                <div class="card card-danger">
                                     <div class="card-header">
                                         <h3 class="card-title">Resultados Disponiveis</h3>
                                     </div>
@@ -136,12 +136,12 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <div class="card-footer">
                                                 <!-- <button type="submit" class="btn btn-primary">Notificar</button> -->
-                                                <a th:href="@{/vacinacoes/sendAllSms}" class="btn btn-primary"
+                                                <a th:href="@{/vacinacoes/sendAllSms}" class="btn btn-danger"
                                                     role="button" id="downloadcsvfile"
                                                     style="float: right; margin-left: 10px;">
                                                     Notificar Por SMS <i class="fas fa-sms"></i></a>
 
-                                                <a th:href="@{/vacinacoes/sendAllEmails}" class="btn btn-primary"
+                                                <a th:href="@{/vacinacoes/sendAllEmails}" class="btn btn-danger"
                                                     role="button" id="sendAllEmails"
                                                     style="float: right; margin-left: 10px;">
                                                     Notificar Por Email <i class="fas fa-envelope"></i></a>

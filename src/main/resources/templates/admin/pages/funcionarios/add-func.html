@@ -48,7 +48,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li class="breadcrumb-item"><a href="#" style="color: red;">Inicio</a></li>
                   <li class="breadcrumb-item active">Adicionar Funcionarios</li>
                 </ol>
               </div>
@@ -64,7 +64,7 @@
               <!-- SELECT2 EXAMPLE -->
               <form th:action="${funcionario.id == null} ? @{/funcionarios/gravar} : @{/funcionarios/editar}"
                 th:object="${funcionario}" method="POST">
-                <div class="card card-primary" style="margin-left: 320px; width: 100%;padding: 10px;">
+                <div class="card card-danger" style="margin-left: 320px; width: 100%;padding: 10px;">
                   <div class="card-header">
                     <h3 class="card-title">Detalhes do Funcionario</h3>
                   </div>
@@ -192,7 +192,7 @@
 
                   </div>
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submeter</button>
+                    <button type="submit" class="btn btn-danger">Submeter</button>
                   </div>
                   <!-- /.row -->
                 </div>
