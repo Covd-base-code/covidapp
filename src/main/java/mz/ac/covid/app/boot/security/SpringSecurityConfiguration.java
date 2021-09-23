@@ -18,8 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
-      
+
     @Autowired
     DataSource dataSource;
 
@@ -27,8 +26,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-        .usersByUsernameQuery("select username,password,enabled from users where username=?")
-		.authoritiesByUsernameQuery("select username,authority from authorities where username=?");
+                .usersByUsernameQuery("select username,password,enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username,authority from authorities where username=?");
 
     }
 
@@ -36,38 +35,31 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
-        .authorizeRequests().antMatchers("/admin").hasRole("ADMIN").and()
-        .headers().frameOptions().disable()
-    .addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM http://localhost:8082/"))
-        // http.csrf()
-        // .disable().
-        // authorizeRequests()
-		// .antMatchers("/**").permitAll()
+        http.csrf().disable().authorizeRequests().antMatchers("/admin").hasRole("ADMIN").and().headers().frameOptions()
+                .disable()
+                .addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM http://localhost:8082/"))
+                // http.csrf()
+                // .disable().
+                // authorizeRequests()
+                // .antMatchers("/**").permitAll()
 
-        // hasRole("ADMIN")
-        // .anyRequest().authenticated()
-		// Any other URLs which are not configured in above antMatchers
-		// generally declared aunthenticated() in real time
-		// .anyRequest().permitAll()
-		
-		//Login Form Details
-		.and()
-		.formLogin()
-		// .defaultSuccessUrl("/welcome", true)
-		
-		//Logout Form Details
-		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login#panel--logout")
-				
-		//Exception Details		
-		.and()	
-		.exceptionHandling()
-		.accessDeniedPage("/accessDenied")
-        
-		;
+                // hasRole("ADMIN")
+                // .anyRequest().authenticated()
+                // Any other URLs which are not configured in above antMatchers
+                // generally declared aunthenticated() in real time
+                // .anyRequest().permitAll()
 
+                // Login Form Details
+                .and().formLogin()
+                // .defaultSuccessUrl("/welcome", true)
+
+                // Logout Form Details
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+
+                // Exception Details
+                .and().exceptionHandling().accessDeniedPage("/accessDenied")
+
+        ;
 
     }
 

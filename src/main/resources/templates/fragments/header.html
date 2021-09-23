@@ -32,8 +32,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" href="#" style="color: white"><i
-                            class="fas fa-sign-out-alt"></i> Sair</a>
+                    <form th:action="@{/logout}" method="post">
+
+                        <button type="submit" class="nav-link btn" style="color: white; border:none;"><i
+                                class="fas fa-sign-out-alt"></i>
+                            Sair</button>
+                        <!--                         <button type="submit" class="btn  "
+                            style=" border-color: #FFF;font-size:13px; border-width: 1.5px;color: #000; background-color: #C2CAD0">
+                            <i class="fa fa-sign-out" style="margin-right: 8px"></i>Sair
+                        </button> -->
+
+
+                    </form>
+
                 </li>
             </ul>
         </nav>

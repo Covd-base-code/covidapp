@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class HomeController {
 
-    @GetMapping("admin")
+    @GetMapping(value = { "/", "", "/admin" })
     public String admin() {
         return "iframe";
     }
